@@ -41,6 +41,14 @@ Route::post('/audios', 'AudioController@audioSearchIndex')->name('audio.index');
 Route::get('/user/{id}/show', 'UserController@show')->name('user.show');
 
 
+// 募集全件取得
+Route::get('recruitments', 'RecruitmentController@index')->name('recruitment.index');
+// 最新データ6件取得(トップページで使うやつ)
+Route::get('top/recruitments', 'RecruitmentController@topindex')->name('recruitment.topindex');
+// 募集詳細取得
+Route::get('recruitment/{id}', 'RecruitmentController@show')->name('recruitment.show');
+
+
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -129,14 +137,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('recruitment/{id}/update', 'RecruitmentController@update')->name('recruitment.update');
     // 募集削除
     Route::delete('recruitment/{id}', 'RecruitmentController@delete')->name('recruitment.delete');
-    // 募集全件取得
-    Route::get('recruitments', 'RecruitmentController@index')->name('recruitment.index');
-    // 最新データ6件取得(トップページで使うやつ)
-    Route::get('top/recruitments', 'RecruitmentController@topindex')->name('recruitment.topindex');
     // ログインユーザーの募集全件取得
     Route::get('loginuser/recruitments', 'RecruitmentController@loginuUserIndex')->name('recruitment.loginuUserIndex');
-    // 募集詳細取得
-    Route::get('recruitment/{id}', 'RecruitmentController@show')->name('recruitment.show');
     // ログインユーザーの特定の募集を取得
     Route::get('recruitment/edit/{id}', 'RecruitmentController@edit')->name('recruitment.edit');
 
