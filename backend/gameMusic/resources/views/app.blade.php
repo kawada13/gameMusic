@@ -7,10 +7,10 @@
         <title>GameMusic</title>
     </head>
     <body>
-        <div id="app">
+        <div id="app" style="display: flex; flex-direction: column; min-height: 100vh; background:#F6F6F4;">
               <app-header class=></app-header>
                <router-view></router-view>
-             <app-footer class=></app-footer>
+             <app-footer style="margin-top: auto;"></app-footer>
         </div>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
