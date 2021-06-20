@@ -220,5 +220,14 @@ class UserSeeder extends Seeder
             I/F:Antelope audio　Discrete4 synergy Core\n
             Mic：audio‐technica AT4040 , Antelope audio Edge solo',
         ]);
+        DB::table('recruitments')->insert([
+            'user_id' => 13,
+            'title' => '爽快なオープニング曲が欲しいです。',
+            'content' => '爽快なオープニング曲が欲しいです。\n
+            RPGゲームのオープニング曲を考えています。\n
+            長めの2:30くらいがいいです。\n
+            予算は1,000~5,000くらいで考えています。\n
+            もし出来れば一度メッセージのやりとりを通して、より具体的に相談できたらなとおもいます。',
+        ]);
     }
 }
