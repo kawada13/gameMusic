@@ -25,7 +25,8 @@
                 <!-- <audio controls class="my-3">
                 <source :src="audio.audio_file">
               </audio> -->
-                 <a type="button" class="btn btn-danger font-weight-bold text-white" id="download" @click="download(audio.audio_file)" download><i class="fas fa-download mr-2"></i>ダウンロード</a>
+                 <a type="button" class="btn btn-danger font-weight-bold text-white" id="download" download :href="audio.audio_file"><i class="fas fa-download mr-2"></i>ダウンロード</a>
+                 <!-- <a type="button" class="btn btn-danger font-weight-bold text-white" id="download" @click="download(audio.audio_file)" download><i class="fas fa-download mr-2"></i>ダウンロード</a> -->
                  <!-- <a class="btn btn-danger font-weight-bold text-white" href="https://example.com/my_file.txt" download="sample"><i class="fas fa-download mr-2"></i>ダウンロード</a> -->
               </div>
             </div>

@@ -62,6 +62,10 @@
 
       </div>
 
+      <div class="text-center mt-5">
+        <a class="btn btn-outline-primary" v-if="isLogined && !isMine && !isAdmin" @click="$router.push({ name: 'message', params: { id: `${recruitment.user_id}` }})">このユーザーにメッセージで提案する</a>
+      </div>
+
     </div>
 
 
