@@ -67,9 +67,9 @@
                   </div>
 
                 </div>
-                <button type="submit" class="btn btn-primary my-4 store mr-5">保存<i class="fas fa-chevron-right pl-2"></i></button>
-                <button type="button" class="btn btn-primary my-4 cancel" @click="cancel">戻る</button>
               </fieldset>
+                <button type="submit" class="btn btn-primary my-4 store mr-5" :disabled="isGuest">保存<i class="fas fa-chevron-right pl-2"></i></button>
+                <button type="button" class="btn btn-primary my-4 cancel" @click="cancel">戻る</button>
             </form>
           </div>
         </div>
