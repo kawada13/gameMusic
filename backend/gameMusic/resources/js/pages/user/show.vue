@@ -35,6 +35,9 @@
         <div class="card-header">
           新着オーディオ
         </div>
+        <div class="text-center mt-4" v-if="user.userAudios.length == 0">
+          このユーザーのオーディオはまだ登録されておりません。
+        </div>
         <div v-for="(audio,i) in user.userAudios" :key="i" class="audios ml-4 my-3">
           <Audio
             :audioId="audio.id"
@@ -49,6 +52,7 @@
             type="button"
             class="btn btn-primary"
             @click="$router.push({ name: 'user-audios', params: { id: `${$route.params.id}` }})"
+            v-if="user.userAudios.length !== 0"
             >
             <i class="fas fa-arrow-right mr-2"></i>
             作品をもっと見る</button>
