@@ -22,12 +22,18 @@
                 <source :src="audio.sample_audio_file">
               </audio>
               <div>
-                <!-- <audio controls class="my-3">
-                <source :src="audio.audio_file">
-              </audio> -->
                  <a type="button" class="btn btn-danger font-weight-bold text-white" id="download" download :href="audio.audio_file"><i class="fas fa-download mr-2"></i>ダウンロード</a>
-                 <!-- <a type="button" class="btn btn-danger font-weight-bold text-white" id="download" @click="download(audio.audio_file)" download><i class="fas fa-download mr-2"></i>ダウンロード</a> -->
-                 <!-- <a class="btn btn-danger font-weight-bold text-white" href="https://example.com/my_file.txt" download="sample"><i class="fas fa-download mr-2"></i>ダウンロード</a> -->
+                 <h6 class="card-subtitle my-1 text-muted creater_name">音源のフルバージョンです。<br>リンク先でダウンロード可能です。</h6>
+                <!-- <a type="button" class="btn btn-danger font-weight-bold text-white d-flex justify-content-center audio_download" id="download" download :href="audio.audio_file">
+                  <div class="d-flex align-items-center mr-2">
+                    <audio controls class="my-3">
+                      <source :src="audio.audio_file">
+                    </audio>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <span>ダウンロード</span>
+                  </div>
+                </a> -->
               </div>
             </div>
         </div>
@@ -99,6 +105,17 @@ export default {
   font-weight: 600;
   font-size: 18px;
   color: #334e6f;
+}
+
+.audio_download {
+  padding: 0;
+  height: 40px;
+  width: 136px;
+}
+.audio_download audio{
+  height: 20px;
+  width: 20px;
+  margin: 0!important;
 }
 
 
