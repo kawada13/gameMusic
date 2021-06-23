@@ -24,16 +24,6 @@
               <div>
                  <a type="button" class="btn btn-danger font-weight-bold text-white" id="download" download :href="audio.audio_file"><i class="fas fa-download mr-2"></i>ダウンロード</a>
                  <h6 class="card-subtitle my-1 text-muted creater_name">音源のフルバージョンです。<br>リンク先でダウンロード可能です。</h6>
-                <!-- <a type="button" class="btn btn-danger font-weight-bold text-white d-flex justify-content-center audio_download" id="download" download :href="audio.audio_file">
-                  <div class="d-flex align-items-center mr-2">
-                    <audio controls class="my-3">
-                      <source :src="audio.audio_file">
-                    </audio>
-                  </div>
-                  <div class="d-flex align-items-center">
-                    <span>ダウンロード</span>
-                  </div>
-                </a> -->
               </div>
             </div>
         </div>

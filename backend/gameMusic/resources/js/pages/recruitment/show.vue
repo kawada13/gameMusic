@@ -53,7 +53,7 @@
 
               </div>
               <div class="card-body pt-5 text-center">
-                <h5 class="card-text creater_introduce">{{recruitment.user.user_information.introduce}}</h5>
+                <h5 class="card-text creater_introduce" v-html="recruitment.user.user_information.introduce"></h5>
                 <a class="btn btn-outline-primary" v-if="isLogined && !isMine && !isAdmin" @click="$router.push({ name: 'message', params: { id: `${recruitment.user_id}` }})">メッセージを送る</a>
               </div>
             </div>

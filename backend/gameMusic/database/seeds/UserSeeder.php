@@ -53,6 +53,12 @@ class UserSeeder extends Seeder
             'content' => 'タイトルにあるようにラスボスで使うようなBGMが欲しいです。<br>予算は大体5,000~10,000くらいで考えています。<br>よろしくお願いします！',
             'created_at' => date("Y-m-d H:i:s")
         ]);
+        DB::table('recruitments')->insert([
+            'user_id' => 3,
+            'title' => 'ゲームリザルトジングルを募集します。',
+            'content' => '表題の通り、ゲームリザルト時に流れるジングルを募集します。<br><br>予算は大体5,000~10,000くらいで考えています。<br>詳しい内容はメッセージ等でお話できたらなとおもいます！<br><br>よろしくお願いします！',
+            'created_at' => date("Y-m-d H:i:s")
+        ]);
 
         DB::table('users')->insert([
             'name' => '隼人',
@@ -126,13 +132,13 @@ class UserSeeder extends Seeder
         DB::table('recruitments')->insert([
             'user_id' => 7,
             'title' => 'シリアスシーンのBGMが欲しいです。',
-            'content' => '友人を裏切るシーンで使うことを想定しています。<br>なるべく聞いてて不安を感じさせるような感じがいいです。<br>秒数的には1:30~2:30kくらいを考えています。',
+            'content' => '表題の通り、シリアスシーンのBGMを募集してします！<br><br>■想定するシーン<br>友人を裏切るシーンで使うことを想定しています。<br>なるべく聞いてて不安を感じさせるような感じがいいです。<br><br>■長さ<br>秒数的には1:30~2:30くらいを考えています。<br><br>■価格<br>2,000~10,000円くらいで考えています。',
             'created_at' => date("Y-m-d H:i:s")
         ]);
         DB::table('recruitments')->insert([
             'user_id' => 7,
             'title' => '回復のジングル',
-            'content' => '回復のジングルを探しています。<br>ドラクエみたいに聞いてて回復してると響かせてくれるような感じを求めてます！<br>もし出来れば一度通話などして、相談できればなと思います!どうか皆さんよろしくお願いいたします。',
+            'content' => '回復のジングルを探しています。<br><br>ドラクエみたいに聞いてて回復してると響かせてくれるような感じを求めてます！<br>もし出来れば一度通話などして、相談できればなと思います!<br><br>どうか皆さんよろしくお願いいたします。',
             'created_at' => date("Y-m-d H:i:s")
         ]);
 
@@ -166,7 +172,7 @@ class UserSeeder extends Seeder
         DB::table('recruitments')->insert([
             'user_id' => 9,
             'title' => '幻想的なピアノバラードを募集します。',
-            'content' => '幻想的なピアノバラードを募集します。<br>ラスボス前の重要なシーンで使う想定です。<br>長めの2:30くらいがいいです。<br>もし出来れば一度メッセージのやりとりを通して、より具体的に相談できたらなとおもいます。',
+            'content' => '幻想的なピアノバラードを募集します。<br><br>ラスボス前の重要なシーンで使う想定です。<br>長めの2:30くらいがいいです。<br><br>もし出来れば一度メッセージのやりとりを通して、より具体的に相談できたらなとおもいます。',
             'created_at' => date("Y-m-d H:i:s")
         ]);
         DB::table('recruitments')->insert([
@@ -215,6 +221,12 @@ class UserSeeder extends Seeder
             'user_id' => 12,
             'introduce' => '安藤です。ゲームミュージック制作における数々の賞を受賞しています。よろしくお願いいたします。',
             'instrument' => 'メインスピーカー：YAMAHA MSP5 STUDIO<br>ピアノ：CinePiano',
+            'created_at' => date("Y-m-d H:i:s")
+        ]);
+        DB::table('recruitments')->insert([
+            'user_id' => 12,
+            'title' => 'パズルゲーム系サウンド募集',
+            'content' => 'パズルゲーム系サウンド募集します。<br><br>それぞれの音源の予算、分数などはメッセージにて相談させていただけたらなと思います。<br>制作期間等も特に指定はございません。<br>もし出来れば一度メッセージのやりとりを通して、より具体的に相談できたらなとおもいます。<br><br>よろしくお願いします！！',
             'created_at' => date("Y-m-d H:i:s")
         ]);
 
