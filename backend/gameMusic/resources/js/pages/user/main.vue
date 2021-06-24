@@ -9,7 +9,7 @@
             <div class="creater_image mb-3" v-if="user.user.user_information.profile_image">
               <img :src="user.user.user_information.profile_image" class="rounded-circle">
             </div>
-            <div class="creater_image mb-3" >
+            <div class="creater_image mb-3" v-else>
               <img src="/images/default_img.png" class="rounded-circle">
             </div>
 
