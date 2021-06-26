@@ -115,6 +115,18 @@ const actions = {
       console.log(e.response);
     })
   },
+  // (検索)結果取得
+  async getSearchRecruitments({ commit }, data) {
+    // console.log(data);
+    await axios.post(`/api/searchIndex`, data)
+    .then(res => {
+      // console.log(res.data);
+      commit('setRecruitments', res.data);
+    })
+    .catch(e => {
+      console.log(e);
+    })
+  },
 
 }
 
