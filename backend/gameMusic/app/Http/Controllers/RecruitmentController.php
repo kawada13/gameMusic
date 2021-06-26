@@ -258,4 +258,41 @@ class RecruitmentController extends Controller
             ],500);
         }
     }
+
+    // 検索募集取得
+    public function searchIndex(Request $request) {
+
+        try {
+            $keyword = $request->keyword;
+
+            $_keyword = str_replace('　', ' ', $keyword);  //全角スペースを半角に変換
+            $_keyword = preg_replace('/\s(?=\s)/', '', $_keyword); //連続する半角スペースは削除
+            $_keyword = trim($_keyword); //文字列の先頭と末尾にあるホワイトスペースを削除
+
+            // キーワード入力があったら
+            if($request->keyword) {
+                $recruitments = Recruitment::with('user')
+                                 ->where('title', 'like', "%$_keyword%")
+                                 ->orwhere('content', 'like', "%$_keyword%")
+                                 ->get();
+            }
+
+            // 何も入力がなかったら
+            if(!$request->keyword) {
+                $recruitments = Recruitment::with('user')->get();
+            }
+
+            return response()->json([
+                'message' => '検索成功',
+                'recruitments' => $recruitments,
+            ], 200);
+
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'message' => '失敗',
+                'errorInfo' => $e
+            ],500);
+        }
+    }
 }

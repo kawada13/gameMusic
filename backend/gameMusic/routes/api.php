@@ -47,6 +47,8 @@ Route::get('recruitments', 'RecruitmentController@index')->name('recruitment.ind
 Route::get('top/recruitments', 'RecruitmentController@topindex')->name('recruitment.topindex');
 // 募集詳細取得
 Route::get('recruitment/{id}', 'RecruitmentController@show')->name('recruitment.show');
+// 検索募集取得
+Route::post('/searchIndex', 'RecruitmentController@searchIndex')->name('audio.searchIndex');
 
 
 
