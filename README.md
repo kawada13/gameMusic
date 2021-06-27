@@ -29,7 +29,7 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 
 ## 機能一覧　　
 
-### 登録/ログイン関連
+### 登録/ログイン関連(laravel/sanctum)
 ・ユーザーログイン/登録  
 ・ゲストユーザーログイン(簡単ログイン)  
 ・管理者ログイン(mail: admin@gmail.com, password: adminuser)
@@ -54,7 +54,7 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
  　⇨ここでいう「募集」というのは、ゲーム音源を探して自分の欲するものがなかった場合に、自分が期待するサウンドを作ってくれ  
 　　るように音源を募集することを指します。  
 
-・オーディオ出品(作成)&編集&削除&一覧確認  
+・オーディオ出品(作成)&編集&削除&一覧確認(ffmpeg)  
 　⇨オーディオファイルはAWS S3へ。FFMPEGを使用して音源を加工も含みます。  
  
 ・売上管理  
@@ -82,12 +82,12 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 ・ページネーション  
 　⇨オーディオ一覧、募集一覧等のページで実装。  
  
-・レスポンシブ対応  
+・レスポンシブ対応(bootstrap)  
 　⇨Bootstrapを使用して対応。  
  
 ・PHPUnit  
 
-・フラッシュメッセージ表示  
+・フラッシュメッセージ表示(vue-toasted)  
 　⇨ログイン、ログアウト、登録、編集、削除時にメッセージ表示  
  
  
@@ -102,7 +102,30 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 ![スクリーンショット 2021-06-27 18 16 39](https://user-images.githubusercontent.com/61454264/123539273-d33af780-d773-11eb-8fea-0dd0490bfaf3.png)  
 
 
-## 使用技術    
+## 使用技術   
+### フロントエンド  
+　・Vue.js 2.5.17  
+　・vue-router 3.5.1  
+　・vuex 3.6.2  
+　・vuejs-paginate": 2.1.0  
+　・vue-toasted 1.1.28  
+　・bootstrap　4.0.0  
+　・HTML/CSS
+
+### バックエンド  
+　・PHP 7.2.5  
+　・Laravel 7.30.4  
+　・laravel/sanctum 2.11  
+　・stripe-php 7.82  
+　・PHPUnit 8.5.8  
+ 
+### インフラ  
+　・Docker 20.10.05  
+　・docker-compose 1.29.0  
+　・CircleCi  
+　・AWS(EC2,RDS,VPC,S3,IAM,)  
+　・nginx:1.18  
+　・mysql:5.7  
 
 
 
