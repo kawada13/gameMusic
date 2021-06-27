@@ -147,6 +147,13 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 | chat_messages  | チャットメッセージ情報  |
 | chat_rooms  | チャットルーム情報  |
 | chat_rooms_users  | ユーザーのチャットルーム情報  |
+| favorites  | お気に入り中間テーブル  |
+| transfer_accounts  | ユーザー口座情報  |
+| users  | ユーザー情報  |
+| user_informations  | ユーザープロフィール情報  |
+| user_follows  | ユーザーフォロー情報  |
+
+
 
 
 
