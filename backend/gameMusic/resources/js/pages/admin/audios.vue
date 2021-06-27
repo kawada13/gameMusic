@@ -26,6 +26,7 @@
               <td><a href @click="$router.push({ name: 'audioshow', params: { id: `${audio.id}` }})">{{ audio.title }}</a></td>
               <td><a href @click="$router.push({ name: 'usershow', params: { id: `${audio.user_id}` }})">{{ audio.user.name }}</a></td>
               <td>{{audio.created_at | fromiso}}</td>
+              <td class="btn btn-danger" @click="del(audio.id)">削除</td>
             </tr>
           </tbody>
         </table>
@@ -83,6 +84,28 @@ export default {
     },
   },
   methods: {
+    async del(id) {
+       let conf = confirm('本当に削除しますか？');
+
+       if(conf) {
+          console.log('削除');
+          try {
+            this.loading = true
+            await this.$store.dispatch('audio/getExhibitedAudioDelete', id)
+          }
+          catch(e){
+            console.log(e);
+            this.loading = false
+          }
+          finally{
+            this.getAudiosData()
+            this.loading = false
+          }
+       }else {
+         return
+       }
+
+    },
     clickCallback(pageNum) { //ページネーション用
       this.paginateData.currentPage = Number(pageNum);
     },

@@ -449,6 +449,28 @@ class AudioController extends Controller
                 'isloginUserAudio' => true
               ], 200);
            }
+            // 管理者ユーザーでもおけ
+            $user = Auth::user();
+           if ($user->scope == 1) {
+
+               // 関連するsoundTypeの中間テーブルのデータ削除
+               AudioInstrument::where('audio_id',$audio->id)->delete();
+               AudioUnderstanding::where('audio_id',$audio->id)->delete();
+               AudioUse::where('audio_id',$audio->id)->delete();
+
+               // ソフトデリート
+               $audio->delete();
+
+               // s3内のオーディオ削除
+               Storage::disk('s3')->delete(parse_url($audio->audio_file)['path']);
+               Storage::disk('s3')->delete(parse_url($audio->sample_audio_file)['path']);
+
+               DB::commit();
+
+               return response()->json([
+                'isloginUserAudio' => true
+              ], 200);
+           }
 
            return response()->json([
             'isloginUserAudio' => false

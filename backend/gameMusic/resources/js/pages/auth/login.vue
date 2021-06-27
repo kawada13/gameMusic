@@ -24,6 +24,8 @@
               <div class="d-flex justify-content-start"><label for="password">パスワード</label></div>
               <input type="password" class="form-control form-control-lg" id="passsword" v-model="form.password">
               <div class="d-flex justify-content-start"><small class="form-text text-muted">6文字以上で入力してください。</small></div>
+              <div class="d-flex justify-content-start"><small class="form-text text-muted">管理者ユーザーアドレス：admin@gmail.com</small></div>
+              <div class="d-flex justify-content-start"><small class="form-text text-muted">管理者ユーザーパスワード：adminuser</small></div>
               <div class="alert alert-danger mt-2" role="alert" v-if="errors.password.required">
                 パスワードの入力は必須です！
               </div>
