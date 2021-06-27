@@ -1,7 +1,9 @@
 ## Game Music
 ### 概要
 
-Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」、「ジングル」、「声」を必要とするユーザーに、その音源を届けるサービスです。
+Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」、「ジングル」、「声」を必要とするユーザーに、その音源を届けるサービスです。  
+
+技術的構成は、フロントはVue.js、バックエンドはLaravelをAPIとして機能させることで、完全SPA構成になっております。
 
 
 ## 開発のきっかけ
@@ -108,7 +110,8 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 　・vue-router 3.5.1  
 　・vuex 3.6.2  
 　・vuejs-paginate": 2.1.0  
-　・vue-toasted 1.1.28  
+　・vue-toasted 1.1.28 
+　・axios 0.19  
 　・bootstrap　4.0.0  
 　・HTML/CSS
 
