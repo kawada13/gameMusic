@@ -65,7 +65,7 @@ jobs:
      - run:
         name: deploy
         command: |
-          ssh -o StrictHostKeyChecking=no -t webapp@${HOST_NAME} "cd gameMusic && \
+          ssh -o StrictHostKeyChecking=no -t ubuntu@${HOST_NAME} "cd gameMusic && \
             git pull origin main"
 
 
