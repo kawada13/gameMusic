@@ -87,6 +87,7 @@ import RecruitmentShow from '../pages/recruitment/show.vue'
 
 const routes = new VueRouter({
   mode:'history',
+  base:'/gameMusic/public/',
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }
   },
