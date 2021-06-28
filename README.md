@@ -1,7 +1,9 @@
 ## Game Music
 ### 概要
 
-Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」、「ジングル」、「声」を必要とするユーザーに、その音源を届けるサービスです。
+Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」、「ジングル」、「声」を必要とするユーザーに、その音源を届けるサービスです。  
+
+技術的構成は、フロントはVue.js、バックエンドはLaravelをAPIとして機能させることで、完全SPA構成になっております。
 
 
 ## 開発のきっかけ
@@ -29,7 +31,7 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 
 ## 機能一覧　　
 
-### 登録/ログイン関連
+### 登録/ログイン関連(laravel/sanctum)
 ・ユーザーログイン/登録  
 ・ゲストユーザーログイン(簡単ログイン)  
 ・管理者ログイン(mail: admin@gmail.com, password: adminuser)
@@ -54,7 +56,7 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
  　⇨ここでいう「募集」というのは、ゲーム音源を探して自分の欲するものがなかった場合に、自分が期待するサウンドを作ってくれ  
 　　るように音源を募集することを指します。  
 
-・オーディオ出品(作成)&編集&削除&一覧確認  
+・オーディオ出品(作成)&編集&削除&一覧確認(ffmpeg)  
 　⇨オーディオファイルはAWS S3へ。FFMPEGを使用して音源を加工も含みます。  
  
 ・売上管理  
@@ -82,12 +84,12 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 ・ページネーション  
 　⇨オーディオ一覧、募集一覧等のページで実装。  
  
-・レスポンシブ対応  
+・レスポンシブ対応(bootstrap)  
 　⇨Bootstrapを使用して対応。  
  
 ・PHPUnit  
 
-・フラッシュメッセージ表示  
+・フラッシュメッセージ表示(vue-toasted)  
 　⇨ログイン、ログアウト、登録、編集、削除時にメッセージ表示  
  
  
@@ -99,7 +101,62 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 ![スクリーンショット 2021-06-27 18 09 58](https://user-images.githubusercontent.com/61454264/123539071-e4cfcf80-d772-11eb-94d3-292757b35e2e.png)  
 
 ### オーディオ関連  
-![スクリーンショット 2021-06-27 18 11 31](https://user-images.githubusercontent.com/61454264/123539123-1b0d4f00-d773-11eb-9616-3be97c418f3d.png)
+![スクリーンショット 2021-06-27 18 16 39](https://user-images.githubusercontent.com/61454264/123539273-d33af780-d773-11eb-8fea-0dd0490bfaf3.png)  
+
+
+## 使用技術   
+### フロントエンド  
+　・Vue.js 2.5.17  
+　・vue-router 3.5.1  
+　・vuex 3.6.2  
+　・vuejs-paginate": 2.1.0  
+　・vue-toasted 1.1.28 
+　・axios 0.19  
+　・bootstrap　4.0.0  
+　・HTML/CSS
+
+### バックエンド  
+　・PHP 7.2.5  
+　・Laravel 7.30.4  
+　・laravel/sanctum 2.11  
+　・stripe-php 7.82  
+　・PHPUnit 8.5.8  
+ 
+### インフラ  
+　・Docker 20.10.05  
+　・docker-compose 1.29.0  
+　・CircleCi  
+　・AWS(EC2,RDS,VPC,S3,IAM,)  
+　・nginx:1.18  
+　・mysql:5.7  
+ 
+## DB設計関連  
+### ER図
+![スクリーンショット 2021-06-27 15 54 23](https://user-images.githubusercontent.com/61454264/123541773-2ff0df00-d781-11eb-92d1-5b626507e5c4.png)  
+
+### テーブル
+| テーブル名 | 内容 |
+| ------------- | ------------- |
+| audios  | オーディオ情報  |
+| audio_instrument  | オーディオ機材の中間テーブル  |
+| audio_understanding  | オーディオイメージの中間テーブル  |
+| audio_use  | オーディオ用途の中間テーブル  |
+| instruments  | 機材情報マスター  |
+| understandings  | イメージ情報マスター  |
+| uses  | 用途情報マスター  |
+| chat_messages  | チャットメッセージ情報  |
+| chat_rooms  | チャットルーム情報  |
+| chat_rooms_users  | ユーザーのチャットルーム情報  |
+| favorites  | お気に入り中間テーブル  |
+| transfer_accounts  | ユーザー口座情報  |
+| users  | ユーザー情報  |
+| user_informations  | ユーザープロフィール情報  |
+| user_follows  | ユーザーフォロー情報  |
+
+
+
+
+
 
 
 
