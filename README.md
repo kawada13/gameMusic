@@ -57,6 +57,13 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 ・オーディオ出品(作成)&編集&削除&一覧確認(ffmpeg)  
 　⇨オーディオファイルはAWS S3へ。FFMPEGを使用して音源を加工も含みます。  
  
+ <img src="https://user-images.githubusercontent.com/61454264/123949722-d89b7a80-d9dd-11eb-9a05-cbf07f8673fb.gif" width="700">
+ 
+ <img src="https://user-images.githubusercontent.com/61454264/123950819-1220b580-d9df-11eb-9a25-f44fd0947218.gif" width="700">
+ 
+ 
+
+ 
 ・売上管理  
 　⇨売上金の確認、引き出し申請等ができます。引き出し申請後は、管理者ページにて管理者が処理。  
  
@@ -89,17 +96,6 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 
 ・フラッシュメッセージ表示(vue-toasted)  
 　⇨ログイン、ログアウト、登録、編集、削除時にメッセージ表示  
- 
- 
-## サイトイメージ
-### トップページ  
-![screencapture-localhost-10020-2021-06-27-16_26_05](https://user-images.githubusercontent.com/61454264/123538977-53605d80-d772-11eb-9a9f-e993aaf2ca11.png)  
-
-### ユーザーマイページ関連
-![スクリーンショット 2021-06-27 18 09 58](https://user-images.githubusercontent.com/61454264/123539071-e4cfcf80-d772-11eb-94d3-292757b35e2e.png)  
-
-### オーディオ関連  
-![スクリーンショット 2021-06-27 18 16 39](https://user-images.githubusercontent.com/61454264/123539273-d33af780-d773-11eb-8fea-0dd0490bfaf3.png)  
 
 
 ## 使用技術   
