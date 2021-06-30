@@ -53,8 +53,9 @@ export default {
             this.loading = false
           }
           finally{
+            await this.$router.go({path: this.$router.currentRoute.path, force: true})
             this.toasted();
-            this.getExhibitedAudiosData()
+            // this.getExhibitedAudiosData()
             this.loading = false
           }
        }else {
