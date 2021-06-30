@@ -41,6 +41,14 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 ・ゲームサウンド購入&購入履歴確認  
 　⇨Stripeを使った決済。購入ページにて自身のカード情報を入力し、単発決済。  
  
+ <img src="https://user-images.githubusercontent.com/61454264/123968660-6719f700-d9f2-11eb-924e-2f46d2e28f61.gif" width="700">  
+ 
+ 選んだ商品はStripeの決済フォームからクレジットカード情報を入力して、購入することができます。  
+ 
+ <img src="https://user-images.githubusercontent.com/61454264/123971382-f2948780-d9f4-11eb-85d9-a92e2f6f9bc8.gif" width="700">  
+ 
+ 
+ 
 ・お気に入り登録&お気に入り一覧確認  
 　⇨ゲームサウンドのお気に入り  
  
@@ -49,6 +57,10 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
  
 ・メッセージやり取り  
 　⇨ユーザー個人間で、メッセージのやりとりができます。音源募集をした後とかに詳しい内容のやりとり等で使われる想定です。  
+ 
+ <img src="https://user-images.githubusercontent.com/61454264/123975319-3210a300-d9f8-11eb-9269-b653462c3d17.gif" width="700">  
+ 
+
  
  ・募集作成&編集&削除&自身の募集一覧確認  
  　⇨ここでいう「募集」というのは、ゲーム音源を探して自分の欲するものがなかった場合に、自分が期待するサウンドを作ってくれ  
@@ -105,7 +117,7 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 　・vue-router 3.5.1  
 　・vuex 3.6.2  
 　・vuejs-paginate": 2.1.0  
-　・vue-toasted 1.1.28 
+　・vue-toasted 1.1.28   
 　・axios 0.19  
 　・bootstrap　4.0.0  
 　・HTML/CSS
