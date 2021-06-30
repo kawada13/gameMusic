@@ -56,6 +56,7 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 
 ・オーディオ出品(作成)&編集&削除&一覧確認(ffmpeg)  
 　⇨オーディオファイルはAWS S3へ。FFMPEGを使用して音源を加工も含みます。  
+　⇨投稿する際は、関連するタグを選択して、投稿する
  
  <img src="https://user-images.githubusercontent.com/61454264/123949722-d89b7a80-d9dd-11eb-9a05-cbf07f8673fb.gif" width="700">
  
