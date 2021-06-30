@@ -99,6 +99,15 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 ・検索  
 　⇨フリーワード、ジャンル選択でオーディオ、募集を検索できます。  
  
+ ■フリーワード検索(トップから)  
+ <img src="https://user-images.githubusercontent.com/61454264/123986810-9b48e400-da01-11eb-8b17-43ad1e63a2ec.gif" width="700">  
+ 
+ ■タグ検索(トップから)  
+ <img src="https://user-images.githubusercontent.com/61454264/123989609-04315b80-da04-11eb-8a98-c653d896887c.gif" width="700">  
+ 
+ ■オーディオ詳細画面からの検索  
+ <img src="https://user-images.githubusercontent.com/61454264/123990898-2c6d8a00-da05-11eb-8677-1ac3c05ab2dc.gif" width="700">  
+ 
 ・ページネーション  
 　⇨オーディオ一覧、募集一覧等のページで実装。  
  
