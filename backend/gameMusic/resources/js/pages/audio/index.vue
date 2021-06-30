@@ -329,6 +329,9 @@ export default {
       if(this.form.understanding == 5) {
         this.serchTitle.understanding = 'ホラー'
       }
+      if(this.form.understanding == 6) {
+        this.serchTitle.understanding = '驚き'
+      }
       // 用途
       if(this.form.use == 1) {
         this.serchTitle.use = 'バトル'
@@ -345,6 +348,9 @@ export default {
       if(this.form.use == 5) {
         this.serchTitle.use = '日常'
       }
+      if(this.form.use == 6) {
+        this.serchTitle.use = '探索'
+      }
       // 使用機材
       if(this.form.instrument == 1) {
         this.serchTitle.instrument = 'アコースティックギター'
@@ -360,6 +366,21 @@ export default {
       }
       if(this.form.instrument == 5) {
         this.serchTitle.instrument = 'ピアノ'
+      }
+      if(this.form.instrument == 6) {
+        this.serchTitle.instrument = 'オルガン'
+      }
+      if(this.form.instrument == 7) {
+        this.serchTitle.instrument = 'フルート'
+      }
+      if(this.form.instrument == 8) {
+        this.serchTitle.instrument = 'サックス'
+      }
+      if(this.form.instrument == 9) {
+        this.serchTitle.instrument = 'バイオリン'
+      }
+      if(this.form.instrument == 10) {
+        this.serchTitle.instrument = 'その他'
       }
     },
     setFrom() {
@@ -394,6 +415,9 @@ export default {
       if(this.serchTitle.understanding == 'ホラー') {
         this.form.understanding = 5
       }
+      if(this.serchTitle.understanding == '驚き') {
+        this.form.understanding = 6
+      }
       // 用途
       if(this.serchTitle.use == 'バトル') {
         this.form.use = 1
@@ -410,6 +434,9 @@ export default {
       if(this.serchTitle.use == '日常') {
         this.form.use = 5
       }
+      if(this.serchTitle.use == '探索') {
+        this.form.use = 6
+      }
       // 使用機材
       if(this.serchTitle.instrument == 'アコースティックギター') {
         this.form.instrument = 1
@@ -425,6 +452,21 @@ export default {
       }
       if(this.serchTitle.instrument == 'ピアノ') {
         this.form.instrument = 5
+      }
+      if(this.serchTitle.instrument == 'オルガン') {
+        this.form.instrument = 6
+      }
+      if(this.serchTitle.instrument == 'フルート') {
+        this.form.instrument = 7
+      }
+      if(this.serchTitle.instrument == 'サックス') {
+        this.form.instrument = 8
+      }
+      if(this.serchTitle.instrument == 'バイオリン') {
+        this.form.instrument = 9
+      }
+      if(this.serchTitle.instrument == 'その他') {
+        this.form.instrument = 10
       }
     }
   },

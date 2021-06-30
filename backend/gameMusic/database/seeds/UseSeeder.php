@@ -27,5 +27,8 @@ class UseSeeder extends Seeder
         DB::table('uses')->insert([
             'name' => '日常',
         ]);
+        DB::table('uses')->insert([
+            'name' => '探索',
+        ]);
     }
 }

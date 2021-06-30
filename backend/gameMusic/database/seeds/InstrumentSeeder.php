@@ -27,5 +27,20 @@ class InstrumentSeeder extends Seeder
         DB::table('instruments')->insert([
             'name' => 'ピアノ',
         ]);
+        DB::table('instruments')->insert([
+            'name' => 'オルガン',
+        ]);
+        DB::table('instruments')->insert([
+            'name' => 'フルート',
+        ]);
+        DB::table('instruments')->insert([
+            'name' => 'サックス',
+        ]);
+        DB::table('instruments')->insert([
+            'name' => 'バイオリン',
+        ]);
+        DB::table('instruments')->insert([
+            'name' => 'その他',
+        ]);
     }
 }

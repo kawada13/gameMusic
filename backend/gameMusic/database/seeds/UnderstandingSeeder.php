@@ -27,5 +27,8 @@ class UnderstandingSeeder extends Seeder
         DB::table('understandings')->insert([
             'name' => 'ホラー',
         ]);
+        DB::table('understandings')->insert([
+            'name' => '驚き',
+        ]);
     }
 }
