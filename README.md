@@ -131,7 +131,7 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 　・Vue.js 2.5.17  
 　・vue-router 3.5.1  
 　・vuex 3.6.2  
-　・vuejs-paginate": 2.1.0  
+　・vuejs-paginate 2.1.0  
 　・vue-toasted 1.1.28   
 　・axios 0.19  
 　・bootstrap　4.0.0  
