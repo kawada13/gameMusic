@@ -149,8 +149,8 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 　・docker-compose 1.29.0  
 　・CircleCi  
 　・AWS(EC2,RDS,VPC,S3,IAM,)  
-　・nginx:1.18  
-　・mysql:5.7  
+　・nginx 1.18  
+　・mysql 5.7  
  
 ## DB設計関連  
 ### ER図
