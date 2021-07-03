@@ -49,8 +49,8 @@ class UserSeeder extends Seeder
         ]);
         DB::table('recruitments')->insert([
             'user_id' => 3,
-            'title' => 'ラスボス線で使うBGMが欲しいです。',
-            'content' => 'タイトルにあるようにラスボスで使うようなBGMが欲しいです。<br>予算は大体5,000~10,000くらいで考えています。<br>よろしくお願いします！',
+            'title' => 'ラスボス戦で使うBGMが欲しいです。',
+            'content' => 'タイトルにあるようにラスボスで使うようなBGMが欲しいです。<br>予算は大体5,000~10,000くらいで考えています。<br><br>よろしくお願いします！',
             'created_at' => date("Y-m-d H:i:s")
         ]);
         DB::table('recruitments')->insert([
