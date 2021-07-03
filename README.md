@@ -147,8 +147,8 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 ### インフラ  
 　・Docker 20.10.05  
 　・docker-compose 1.29.0  
-　・CircleCi  
-　・AWS(EC2,RDS,VPC,S3,IAM,)  
+　・CircleCi(テスト、デプロイ自動化)  
+　・AWS(EC2,EIP,RDS,VPC,S3,IAM,Ruute53)  
 　・nginx 1.18  
 　・mysql 5.7  
  
