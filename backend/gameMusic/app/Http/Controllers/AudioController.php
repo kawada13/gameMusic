@@ -573,20 +573,5 @@ class AudioController extends Controller
     }
 
 
-    public function show($id) {
-
-        $tweet = Tweet::find($id);
-
-    }
-
-
-    Route::get('messages/{id}', 'MessagesController@show');
-
-
-    public function show(Tweet $tweet) {
-
-        $teet
-
-    }
 
 }
