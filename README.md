@@ -121,7 +121,7 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 　⇨Bootstrapを使用して対応。  
  
 ・PHPUnit  
-<img width="342" alt="スクリーンショット 2021-07-01 1 03 24" src="https://user-images.githubusercontent.com/61454264/123995465-54f78300-da09-11eb-8ad2-e198d8cff4fb.png">
+<img width="500" alt="スクリーンショット 2021-07-01 1 03 24" src="https://user-images.githubusercontent.com/61454264/123995465-54f78300-da09-11eb-8ad2-e198d8cff4fb.png">
 
 
 ・フラッシュメッセージ表示(vue-toasted)  
