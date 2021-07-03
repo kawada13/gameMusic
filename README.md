@@ -29,7 +29,7 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 ### 完全SPA構成  
 
 技術的構成は、フロントはVue.js、バックエンドはLaravelをAPIとして機能させることで、完全SPA構成になっております。  
-<img width="597" alt="スクリーンショット 2021-07-04 0 04 00" src="https://user-images.githubusercontent.com/61454264/124358457-59b37580-dc5b-11eb-8062-dbf2fd51ecc1.png">
+<img width="700" alt="スクリーンショット 2021-07-04 0 04 00" src="https://user-images.githubusercontent.com/61454264/124358457-59b37580-dc5b-11eb-8062-dbf2fd51ecc1.png">
 
 ### 登録/ログイン関連(laravel/sanctum)
 ・ユーザーログイン/登録  
