@@ -36,7 +36,6 @@
                 <li class="list-group-item" @click="$router.push({ name: 'follows'})">フォローしているクリエイター</li>
                 <li class="list-group-item" @click="$router.push({ name: 'messages'})">メッセージ</li>
                 <li class="list-group-item" @click="$router.push({ name: 'login_user_recruitments'})">募集一覧</li>
-                <li class="list-group-item" @click="$router.push({ name: 'buyer_setteing'})">購入者情報設定</li>
               </ul>
             </div>
           </div>
