@@ -16,10 +16,16 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title" @click="$router.push({ name: 'audio-show', params: { id: `${audio.id}` } })">{{ audio.title }}</h5>
-                <audio controls controlslist="nodownload">
-                  <source :src="audio.sample_audio_file">
-                </audio>
-                <p class="card-text"><small class="text-muted" @click="$router.push({ name: 'user-show', params: { id: `${audio.user.id}` }})">{{audio.user.name}}</small></p>
+                <div class="d-flex justify-content-start">
+                  <div>
+                    <img :src="audio.user.user_information.profile_image" class="rounded-circle" v-if="audio.user.user_information.profile_image">
+                    <img src="/images/default_img.png" class="rounded-circle mr-2" v-else>
+                  </div>
+                  <div>
+                    <p class="card-textt "><small class="text-muted" @click="$router.push({ name: 'user-show', params: { id: `${audio.user_id}` }})">作成者:{{audio.user.name}}</small></p>
+                    <p class="card-text"><small class="text-muted" >作成日時:{{audio.updated_at | fromiso}}</small></p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -82,8 +88,9 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-weight: bold;
 }
-.card .card-text:hover {
+.card .card-textt:hover {
     text-decoration: underline;
     cursor: pointer;
 }
@@ -93,6 +100,13 @@ export default {
     white-space: nowrap;
     text-decoration: underline;
     cursor: pointer;
+}
+.card-textt {
+  margin-bottom: 0;
+}
+
+img {
+  width: 45px;
 }
 
 

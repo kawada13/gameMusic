@@ -227,13 +227,17 @@ class AudioController extends Controller
 
             // A のみ⇨もし「キーワード」のみ入力されていたら
             if($request->keyword && !$request->sound && !$request->understanding && !$request->use && !$request->instrument) {
-                $audios = Audio::with('user')
+                $audios = Audio::with(['user' => function($query){
+                                    $query->with('userInformation');
+                                }])
                                  ->where('title', 'like', "%$_keyword%")->get();
             }
 
             // A and (B or C or D or E)⇨もし「キーワード」かつ「サウンドタイプ」が入力されていたら
             if(($request->keyword) && ($request->sound || $request->understanding || $request->use || $request->instrument)) {
-                $audios = Audio::with('user')
+                $audios = Audio::with(['user' => function($query){
+                                    $query->with('userInformation');
+                                }])
                                 ->where('title', 'like', "%$_keyword%")
                                 ->where(function($query) use($soundId, $understandingId, $useId, $instrumentId){
                                     $query->WhereHas('sound', function($q) use($soundId)  {
@@ -254,7 +258,9 @@ class AudioController extends Controller
 
             // (B or C or D or E) のみ⇨もし「サウンドタイプ」のみ入力されていたら
             if((!$request->keyword) && ($request->sound || $request->understanding || $request->use || $request->instrument)) {
-                $audios = Audio::with('user')
+                $audios = Audio::with(['user' => function($query){
+                                    $query->with('userInformation');
+                                }])
                                  ->WhereHas('sound', function($q) use($soundId)  {
                                         $q->whereIn('id', $soundId);
                                     })
@@ -272,7 +278,9 @@ class AudioController extends Controller
 
             // 検索欄に何も入力がなかったら
             if(!$request->keyword && !$request->sound && !$request->understanding && !$request->use && !$request->instrument) {
-                $audios = Audio::with('user')->get();
+                $audios = Audio::with(['user' => function($query){
+                    $query->with('userInformation');
+                }])->get();
             }
 
 
@@ -492,7 +500,9 @@ class AudioController extends Controller
     public function oldAudios() {
 
         try {
-            $audios = Audio::with('user')
+            $audios = Audio::with(['user' => function($query){
+                                $query->with('userInformation');
+                            }])
                             ->oldest()
                             ->take(6)
                             ->get();
@@ -513,7 +523,9 @@ class AudioController extends Controller
     public function newAudios() {
 
         try {
-            $audios = Audio::with('user')
+            $audios = Audio::with(['user' => function($query){
+                                $query->with('userInformation');
+                            }])
                             ->latest()
                             ->take(3)
                             ->get();
