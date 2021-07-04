@@ -6,7 +6,7 @@
 
 Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」、「ジングル」、「声」を必要とするユーザーに、その音源を届けるサービスです。  
 
-<img width="1436" alt="スクリーンショット 2021-06-30 19 47 21" src="https://user-images.githubusercontent.com/61454264/123948036-fec01b00-d9db-11eb-8042-6955c3209f67.png">
+![スクリーンショット 2021-07-05 4 53 50](https://user-images.githubusercontent.com/61454264/124397795-ff92dd00-dd4c-11eb-9673-ece2758fded5.png)
 
 
 ## 開発のきっかけ
@@ -106,13 +106,18 @@ Game Musicはでゲームの様々なシーンにおける「BGM」、「SE」�
 　⇨フリーワード、ジャンル選択でオーディオ、募集を検索できます。  
  
  ■フリーワード検索(トップから)  
- <img src="https://user-images.githubusercontent.com/61454264/123986810-9b48e400-da01-11eb-8b17-43ad1e63a2ec.gif" width="700">  
+ <img src="https://user-images.githubusercontent.com/61454264/124397908-dcb4f880-dd4d-11eb-8742-3477da0ee1f9.gif" width="700">  
  
+
  ■タグ検索(トップから)  
- <img src="https://user-images.githubusercontent.com/61454264/123989609-04315b80-da04-11eb-8a98-c653d896887c.gif" width="700">  
+ <img src="https://user-images.githubusercontent.com/61454264/124397945-171e9580-dd4e-11eb-875c-11f6e887f302.gif" width="700">  
+ 
+  
  
  ■オーディオ詳細画面からの検索  
- <img src="https://user-images.githubusercontent.com/61454264/123990898-2c6d8a00-da05-11eb-8677-1ac3c05ab2dc.gif" width="700">  
+ <img src="https://user-images.githubusercontent.com/61454264/124398030-82686780-dd4e-11eb-81dc-3ae5ef450cea.gif" width="700"> 
+ 
+
  
 ・ページネーション  
 　⇨オーディオ一覧、募集一覧等のページで実装。  
