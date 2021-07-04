@@ -142,9 +142,10 @@ export default {
 
        // 縦横サイズを取得できたので、縦横サイズそれぞれ700px以内にするバリデーション
         this.errors.image.size = false
-        if(this.size.width > 700 || this.size.height > 700) {
-          this.errors.image.size = true
-        }
+        // if(this.size.width > 1200 || this.size.height > 1200) {
+        //   console.log(this.size.width, this.size.height);
+        //   this.errors.image.size = true
+        // }
       })
       .catch(e => {
         console.log('onload error', e);
