@@ -25,6 +25,8 @@ class PurchaseRecordController extends Controller
     public function purchase(PurchaseRecordRequest $request, $id)
     {
 
+        dd(env('STRIPE_SECRET'));
+
 
         // try {
 
