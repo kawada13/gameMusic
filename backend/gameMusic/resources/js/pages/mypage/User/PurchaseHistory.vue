@@ -22,9 +22,10 @@
                 <source :src="audio.sample_audio_file">
               </audio>
               <div>
-                 <a type="button" class="btn btn-danger font-weight-bold text-white" id="download" download :href="audio.audio_file"><i class="fas fa-download mr-2"></i>ダウンロード</a>
-                 <h6 class="card-subtitle my-1 text-muted creater_name">音源のフルバージョンです。<br>リンク先でダウンロード可能です。</h6>
+                 <a type="button" class="btn btn-danger font-weight-bold text-white" @click="download(audio.audio_file, audio.title)" id="download"><i class="fas fa-download mr-2"></i>ダウンロード</a>
+                 <h6 class="card-subtitle my-1 text-muted creater_name">音源のフルバージョンをダウンロードできます。</h6>
               </div>
+
             </div>
         </div>
   </div>
@@ -39,12 +40,22 @@ export default {
     }
   },
   methods: {
-    download(url) {
-      const link = document.createElement('a')
-      link.download = 'result.csv'
-      link.href = url
-      link.click()
+    async download(url, name) {
+      await axios.post(`/api/audios/download`, {url: url})
+      .then(res => {
+        // console.log(res.data);
+        const url = '/mp3/logo.mp3';
+        const fileName = `${name}.mp3`;
+        let link = document.createElement('a');
+        link.href= url;
+        link.download = fileName;
+        link.click();
+      })
+      .catch(e => {
+        console.log(e);
+      })
     },
+
     async getPurchases() {
 
       try{

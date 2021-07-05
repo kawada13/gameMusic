@@ -36,6 +36,7 @@ class AudioController extends Controller
 
             // 以下オーディオファイルの保存
             $audioFile = $request->audio_file;
+
             // S3にアップロード(フルバージョのほう)
             $path = Storage::disk('s3')->put('/audios/product', $audioFile, 'public');
 
@@ -582,6 +583,22 @@ class AudioController extends Controller
                 'errorInfo' => $e
             ],500);
         }
+    }
+
+    // ダウンロードjs
+    public function download(Request $request) {
+
+        $image_path = $request->url;
+
+        $file_name = 'logo.mp3';
+
+        $image = file_get_contents($image_path);
+
+        $save_path = '/work/gameMusic/public/mp3/'.$file_name;
+
+        file_put_contents($save_path, $image);
+
+
     }
 
 
