@@ -155,7 +155,7 @@ URL： http://game-music.fun/
 　・Docker 20.10.05  
 　・docker-compose 1.29.0  
 　・CircleCi(テスト、デプロイ自動化)  
-　・AWS(EC2,EIP,RDS,VPC,S3,IAM,Ruute53)  
+　・AWS(EC2,EIP,RDS,VPC,S3,IAM,Route53)  
 　・nginx 1.18  
 　・mysql 5.7  
  
