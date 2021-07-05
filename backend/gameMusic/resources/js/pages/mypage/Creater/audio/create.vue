@@ -49,7 +49,7 @@
                 ファイル形式は MP3 ファイルのみです!
               </div>
               <div class="alert alert-danger" role="alert" v-if="errors.audio_url.size">
-                ファイルの上限サイズ5MBを超えています!
+                ファイルの上限サイズ7MBを超えています!
               </div>
             </div>
 
@@ -169,8 +169,8 @@ export default {
       if (this.formInfo.audio.file_info.type != 'audio/mpeg') {
         this.errors.audio_url.isFile = true
       }
-      // ファイルサイズ5MB以下のみを許可するバリデーション
-      if (this.formInfo.audio.file_info.size > 5000000) {
+      // ファイルサイズ7MB以下のみを許可するバリデーション
+      if (this.formInfo.audio.file_info.size > 7000000) {
         this.errors.audio_url.size = true
       }
     },
