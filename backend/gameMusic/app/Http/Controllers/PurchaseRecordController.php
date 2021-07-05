@@ -26,7 +26,7 @@ class PurchaseRecordController extends Controller
     {
 
 
-        try {
+        // try {
 
             $audio = Audio::find($id);
 
@@ -77,12 +77,12 @@ class PurchaseRecordController extends Controller
             ], 200);
 
 
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => '失敗',
-                'errorInfo' => $e
-            ],500);
-        }
+        // } catch (\Exception $e) {
+        //     return response()->json([
+        //         'message' => '失敗',
+        //         'errorInfo' => $e
+        //     ],500);
+        // }
 
     }
 
