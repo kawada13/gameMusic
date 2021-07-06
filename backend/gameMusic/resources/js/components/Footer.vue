@@ -1,6 +1,6 @@
 <template>
 <div class="footer py-2">
-  <p class="text-white">© All rights reserved by kawada.</p>
+  <p class="text-white">by kawada.</p>
 </div>
 </template>
 
