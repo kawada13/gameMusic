@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// ストライプチェックアウト
+Route::get('{id}/checkout', 'PurchaseRecordController@checkout')->name('checkout');
+Route::get('{id}/purchase', 'PurchaseRecordController@purchase')->name('purchase');
+
 Route::get('/{any?}', function () {
     return view('app');
 })->where('any', '.+');

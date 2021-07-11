@@ -8,6 +8,7 @@
 
       <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <div class="navbar-nav navlink">
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="isAuth">
               <i class="fas fa-user-alt text-white"></i>
@@ -17,6 +18,8 @@
               <a class="dropdown-item" @click="logout()">ログアウト</a>
             </div>
           </li>
+
+
           <a class="nav-item nav-link text-white" @click="$router.push({ name: 'favorite-audios' })" v-if="isAuth"><i class="far fa-star text-white mr-2"></i>お気に入り</a>
           <a class="nav-item nav-link text-white" @click="$router.push({ name: 'audio-create' })" v-if="isAuth"><i class="fas fa-music mr-2 text-white"></i>出品する</a>
           <a class="nav-item nav-link text-white" @click="$router.push({ name: 'register' })" v-if="isGuest">会員登録</a>

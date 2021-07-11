@@ -21,7 +21,7 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "pbmedia/laravel-ffmpeg": "^7.5",
         "pusher/pusher-php-server": "~4.0",
-        "stripe/stripe-php": "^7.82"
+        "stripe/stripe-php": "^7.88"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

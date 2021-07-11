@@ -53,6 +53,8 @@ Route::post('/searchIndex', 'RecruitmentController@searchIndex')->name('audio.se
 
 
 
+
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
@@ -106,7 +108,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
     // 購入
-    Route::post('{id}/purchase', 'PurchaseRecordController@purchase')->name('purchase');
+    // Route::post('{id}/purchase', 'PurchaseRecordController@purchase')->name('purchase');
     // あるオーディオを購入済かどうかチェック
     Route::get('{id}/isPurchase', 'PurchaseRecordController@isPurchase')->name('isPurchase');
     // ログインユーザーの購入オーディオ一覧

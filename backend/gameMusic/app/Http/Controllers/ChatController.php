@@ -69,6 +69,8 @@ class ChatController extends Controller
         $chat->message = $request->message;
         $chat->save();
 
+        event(new ChatPusher($chat));
+
 
         return response()->json([
             'message' => '成功',

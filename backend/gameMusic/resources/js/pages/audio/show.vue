@@ -78,7 +78,47 @@
             <div class="card">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item price py-4"><i class="fas fa-yen-sign"></i>{{ audio.price | comma }}</li>
-                <li class="list-group-item purchase_btn" v-if="!isMine && !isPurchase && isLogined && !isAdmin"><button type="button" class="btn btn-warning py-3 px-5" data-toggle="modal" data-target="#exampleModal">購入する<i class="fas fa-chevron-right pl-2"></i></button></li>
+
+
+                <!-- <li class="list-group-item purchase_btn" v-if="!isMine && !isPurchase && isLogined && !isAdmin"><button type="button" class="btn btn-warning py-3 px-5" data-toggle="modal" data-target="#exampleModal">購入する<i class="fas fa-chevron-right pl-2"></i></button></li> -->
+                  <v-dialog
+                        v-model="dialog"
+                        width="500"
+                      >
+                    <template v-slot:activator="{ on, attrs }">
+                      <li class="list-group-item purchase_btn" v-if="!isMine && !isPurchase && isLogined && !isAdmin"><button type="button" class="btn btn-warning py-3 px-5" v-bind="attrs" v-on="on">
+                        購入する
+                      <i class="fas fa-chevron-right pl-2"></i></button></li>
+                    </template>
+
+                    <v-card>
+                      <v-card-title class="text-h5 grey lighten-2">
+                        Privacy Policy
+                      </v-card-title>
+
+                      <v-card-text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                      </v-card-text>
+
+                      <v-divider></v-divider>
+
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                          color="primary"
+                          text
+                          @click="dialog = false"
+                        >
+                          I accept
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+
+
+                  </v-dialog>
+                  <v-app style="height: 0"></v-app>
+
+
                 <li class="list-group-item purchase_btn purchased" v-if="!isMine && isPurchase && !isAdmin"><button class="btn btn-warning py-3 px-5">購入済</button></li>
               </ul>
             </div>
@@ -138,7 +178,8 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text-white" data-dismiss="modal">キャンセル</button>
-                <button type="button" class="btn btn-primary text-white" @click="$router.push({ name: 'audio-payment', params: { id: `${audio.id}` }})" data-dismiss="modal">購入申請する</button>
+                <!-- <button type="button" class="btn btn-primary text-white" @click="$router.push({ name: 'audio-payment', params: { id: `${audio.id}` }})" data-dismiss="modal">購入申請する</button> -->
+                <button type="button" class="btn btn-primary text-white" @click="checkout">購入申請する</button>
               </div>
             </div>
           </div>
@@ -155,6 +196,7 @@ export default {
   data() {
     return {
       audio: {},
+      dialog: false,
       loading: false,
       isFavoriteData: false, //このページを見ているログインユーザーが既にこのオーディオをお気に入り済かどうか
       isLogined: false, //現在このページを見ているユーザーがログインしているかどうか
@@ -173,6 +215,10 @@ export default {
     },
   },
   methods: {
+    async checkout() {
+      const url = `http://localhost/${this.$route.params.id}/checkout`
+      window.location.href = url
+    },
     async follow(userId) {
       try{
         await this.$store.dispatch('follow/store', userId)

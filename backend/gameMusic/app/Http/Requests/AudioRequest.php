@@ -25,7 +25,7 @@ class AudioRequest extends FormRequest
     {
         return [
             'sound_id' => 'required',
-            'title' => 'required',
+            'title' => 'required|max:100',
             'price' => 'required|integer',
             'audio_file' => 'required',
         ];

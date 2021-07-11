@@ -22,20 +22,38 @@ class PurchaseRecordController extends Controller
 {
 
     // 購入データを保存
-    public function purchase(PurchaseRecordRequest $request, $id)
+    public function purchase($id)
     {
 
+            $audio = Audio::find($id);
+
+            $PurchaseRecord = new PurchaseRecord;
+            $PurchaseRecord->user_id = Auth::id();
+            $PurchaseRecord->audio_id = $id;
+            $PurchaseRecord->stripe_id = 1;
+            $PurchaseRecord->price = $audio->price;
+            $PurchaseRecord->save();
 
 
-        // try {
+            return redirect('http://localhost/mypage/user/purchase_history');
+
+    }
+
+
+
+    // ストライプチェックアウト
+    public function checkout($id) {
+
+        // そもそもログインしてなかったらアウト
+
+        if (Auth::check()) {
+
 
             $audio = Audio::find($id);
 
             // 自身の作品だったらアウト
             if($audio->user_id == Auth::id()) {
-                return response()->json([
-                    'message' => '自身の作品のため購入できません。',
-                ], 500);
+                return redirect('http://localhost/audios/'. $id);
             }
 
             // 重複購入アウト
@@ -43,49 +61,38 @@ class PurchaseRecordController extends Controller
                                     ->where('user_id', Auth::id())
                                     ->exists();
             if($is_purchased) {
-                return response()->json([
-                    'message' => '購入済です.',
-                ],500);
+                return redirect('http://localhost/audios/'. $id);
             }
+
+            $item = [
+                'name'        => $audio->title,
+                'amount'      => $audio->price,
+                'quantity'    => 1,
+                'currency'    => 'jpy',
+            ];
 
             \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-            $customer = \Stripe\Customer::create([
-                'source' => $request->token_id, // クレジットカードトークン
-                'email'  => $request->email, // メールアドレス
-                'name'   => $request->name,  // 顧客の名前
+            $session = \Stripe\Checkout\Session::create([
+                'payment_method_types' => ['card'],
+                'line_items'           => [$item],
+                'success_url'          => 'http://localhost/' . $id . '/purchase',
+                'cancel_url'           => 'http://localhost/audios/'. $id,
             ]);
 
-            $PurchaseRecord = new PurchaseRecord;
-            $PurchaseRecord->user_id = Auth::id();
-            $PurchaseRecord->audio_id = $id;
-            $PurchaseRecord->stripe_id = $customer->id;
-            $PurchaseRecord->price = $request->price;
-            $PurchaseRecord->save();
-
-
-            $charge = \Stripe\Charge::create([
-                'amount'   => $request->price,     // 金額
-                'currency' => 'jpy',       // 単位
-                'customer' => $customer->id, // 顧客ID
+            return view('cart.checkout', [
+                'session' => $session,
+                'publicKey' => env('STRIPE_KEY')
             ]);
 
-            $customer = \Stripe\Customer::retrieve($PurchaseRecord->stripe_id);
+          } else {
 
-            return response()->json([
-                'message' => '成功',
-                'customer' => $customer
-            ], 200);
+            return redirect('http://localhost/login');
+          }
 
-
-        // } catch (\Exception $e) {
-        //     return response()->json([
-        //         'message' => '失敗',
-        //         'errorInfo' => $e
-        //     ],500);
-        // }
 
     }
+
 
     // あるオーディオを購入済かどうかチェック
     public function isPurchase($id) {

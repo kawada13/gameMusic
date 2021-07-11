@@ -19,8 +19,12 @@
             <div class="form-group">
               <div><label for="title" class="weight">タイトル<span class="badge badge-danger ml-2">必須</span></label></div>
               <input type="text" class="form-control form-control-lg" id="title" v-model="formInfo.title">
+              <div class="d-flex justify-content-start"><small class="form-text text-muted">タイトルは100文字以内です。</small></div>
               <div class="alert alert-danger mt-2" role="alert" v-if="errors.title.required">
                 入力は必須です！
+              </div>
+              <div class="alert alert-danger mt-2" role="alert" v-if="errors.title.size">
+                100文字以内でお願いします！
               </div>
             </div>
 
@@ -117,6 +121,7 @@ export default {
       errors: { //バリデーションエラー
         title: {
           required: false,
+          size: false,
         },
         price: {
           required: false,
@@ -186,7 +191,7 @@ export default {
 
       // バリデーション
       this.validate();
-      if(this.errors.title.required || this.errors.price.required || this.errors.audio_url.required || this.errors.audio_url.isFile || this.errors.audio_url.size)
+      if(this.errors.title.required || this.errors.title.size ||this.errors.price.required || this.errors.audio_url.required || this.errors.audio_url.isFile || this.errors.audio_url.size)
       {
         return
       }
@@ -221,6 +226,9 @@ export default {
 
       if (!this.formInfo.title) {
         this.errors.title.required = true
+      }
+      if (this.formInfo.title.length > 100) {
+        this.errors.title.size = true
       }
       if (!this.formInfo.price) {
         this.errors.price.required = true

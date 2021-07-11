@@ -208,8 +208,16 @@ export default {
   created() {
     Promise.all([
       this.getChatMessagesData(),
-      this.getUserData()
+      this.getUserData(),
     ])
+
+    Echo.channel('ChatRoomChannel')
+        .listen('ChatPusher', (e) => {
+          // console.log(e);
+
+            this.getChatMessagesData();
+
+        });
   },
 }
 </script>
