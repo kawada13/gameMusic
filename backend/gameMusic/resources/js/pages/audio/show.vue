@@ -207,7 +207,7 @@ export default {
   },
   methods: {
     async checkout() {
-      const url = `http://localhost/${this.$route.params.id}/checkout`
+      const url = `http://game-music.fun/${this.$route.params.id}/checkout`
       window.location.href = url
     },
     async follow(userId) {
