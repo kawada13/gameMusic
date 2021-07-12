@@ -18,6 +18,6 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 });
 
 
-Broadcast::channel('GameMusicChannel', function () {
+Broadcast::channel('ChatRoomChannel', function () {
     return true;
 });

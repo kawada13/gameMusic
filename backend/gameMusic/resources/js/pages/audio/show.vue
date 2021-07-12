@@ -37,6 +37,14 @@
 
          <!-- 左下 -->
           <div class="card mt-3">
+
+            <div class="card-body detail type_title d-flex titles justify-content-start">
+              <p class="">説明文</p>
+            </div>
+            <div class="card-body" style="text-align: left;">
+              <p class="mr-2 mb-2 p-2" v-html="audio.content" style="white-space: pre-wrap; word-wrap:break-word; line-height:1.7"></p>
+            </div>
+
             <div class="card-body detail type_title d-flex titles justify-content-start">
               <p class="">サウンドの種類</p>
             </div>
@@ -78,7 +86,53 @@
             <div class="card">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item price py-4"><i class="fas fa-yen-sign"></i>{{ audio.price | comma }}</li>
-                <li class="list-group-item purchase_btn" v-if="!isMine && !isPurchase && isLogined && !isAdmin"><button type="button" class="btn btn-warning py-3 px-5" data-toggle="modal" data-target="#exampleModal">購入する<i class="fas fa-chevron-right pl-2"></i></button></li>
+
+
+                <!-- <li class="list-group-item purchase_btn" v-if="!isMine && !isPurchase && isLogined && !isAdmin"><button type="button" class="btn btn-warning py-3 px-5" data-toggle="modal" data-target="#exampleModal">購入する<i class="fas fa-chevron-right pl-2"></i></button></li> -->
+                  <v-dialog
+                        v-model="dialog"
+                        width="500"
+                      >
+                    <template v-slot:activator="{ on, attrs }">
+                      <li class="list-group-item purchase_btn" v-if="!isMine && !isPurchase && isLogined && !isAdmin"><button type="button" class="btn btn-warning py-3 px-5" v-bind="attrs" v-on="on">
+                        購入する
+                      <i class="fas fa-chevron-right pl-2"></i></button></li>
+                    </template>
+
+                    <v-card>
+                      <v-card-title class="text-h5 d-flex justify-content-around modal_audio">
+                        <div class="product_title">
+                          購入申請
+                        </div>
+                        <div class="batsu" @click="dialog = false"><i class="fas fa-times size"></i></div>
+                      </v-card-title>
+                      <v-divider></v-divider>
+
+                      <v-card-text class="modal_audio_detail">
+                        <p>商品名：{{ audio.title }}</p>
+                        <p>料金：<i class="fas fa-yen-sign"></i>{{ audio.price | comma }}</p>
+                      </v-card-text>
+
+                      <v-divider></v-divider>
+
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                          color="primary"
+                          text
+                          @click="checkout"
+                          style="font-weight: bold;"
+                        >
+                          お支払いへ
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+
+
+                  </v-dialog>
+                  <v-app style="height: 0"></v-app>
+
+
                 <li class="list-group-item purchase_btn purchased" v-if="!isMine && isPurchase && !isAdmin"><button class="btn btn-warning py-3 px-5">購入済</button></li>
               </ul>
             </div>
@@ -122,28 +176,6 @@
 
         </div>
 
-
-        <!-- 購入Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">{{ audio.title }}</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>合計：<i class="fas fa-yen-sign"></i>{{ audio.price | comma }}</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary text-white" data-dismiss="modal">キャンセル</button>
-                <button type="button" class="btn btn-primary text-white" @click="$router.push({ name: 'audio-payment', params: { id: `${audio.id}` }})" data-dismiss="modal">購入申請する</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -155,6 +187,7 @@ export default {
   data() {
     return {
       audio: {},
+      dialog: false,
       loading: false,
       isFavoriteData: false, //このページを見ているログインユーザーが既にこのオーディオをお気に入り済かどうか
       isLogined: false, //現在このページを見ているユーザーがログインしているかどうか
@@ -173,6 +206,10 @@ export default {
     },
   },
   methods: {
+    async checkout() {
+      const url = `http://localhost/${this.$route.params.id}/checkout`
+      window.location.href = url
+    },
     async follow(userId) {
       try{
         await this.$store.dispatch('follow/store', userId)
@@ -301,6 +338,7 @@ export default {
 </script>
 
 <style scoped>
+
 .modal-body p {
   margin-bottom: 0;
   font-size: 23px;
@@ -407,6 +445,32 @@ export default {
   white-space: nowrap;
 }
 
+.size {
+  width: 40px;
+  text-align: center;
+  font-size: 16px;
+}
+
+
+.product_title {
+  font-family: Quicksand, sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  color: #666666;
+}
+.modal_audio_detail {
+  font-family: Quicksand, sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #666666;
+  text-align: left;
+  padding-bottom: 0!important;
+}
+
+.modal_audio {
+  padding-bottom: 0;
+}
+
 @media screen and (max-width:767px) {
     /*画面サイズが767px以下の場合読み込む（スマホ）*/
 
@@ -414,12 +478,70 @@ export default {
       font-weight: bold;
       font-size: 30px
     }
+
+    .batsu {
+      position: absolute;
+      top: 17px;
+      right: 18px;
+      border-radius: 100%;
+      color: #fff;
+      width: 30px;
+      height: 30px;
+      line-height: 27px;
+      cursor: pointer;
+      background: #4DB7FE;
+      transition: all .2s ease-in-out;
+    }
+
+    .batsu:hover{
+        background: #333;
+        border-color: #333;
+        color: #FFF;
+    }
+    .size {
+      width: 31px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .audio-show {
+      height: 1750px;
+    }
 }
 @media screen and (min-width:768px){
     /*画面サイズが768px以上の場合読み込む（PC）*/
 
+    .audio-show {
+      height: 1522px;
+    }
+
     .audio_head h1 {
       font-weight: bold;
+    }
+
+    .batsu {
+      position: absolute;
+      top: 14px;
+      right: 30px;
+      border-radius: 100%;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      line-height: 36px;
+      cursor: pointer;
+      background: #4DB7FE;
+      transition: all .2s ease-in-out;
+    }
+
+    .batsu:hover{
+        background: #333;
+        border-color: #333;
+        color: #FFF;
+    }
+    .size {
+      width: 40px;
+      text-align: center;
+      font-size: 16px;
     }
 }
 </style>

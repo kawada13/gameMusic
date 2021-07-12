@@ -22,6 +22,21 @@
               <div class="alert alert-danger mt-2" role="alert" v-if="errors.title.required">
                 入力は必須です！
               </div>
+               <div class="alert alert-danger mt-2" role="alert" v-if="errors.title.size">
+                100文字以内でお願いします！
+              </div>
+            </div>
+
+             <div class="form-group">
+              <label for="content" class="weight">説明<span class="badge badge-danger ml-2">必須</span></label>
+              <textarea class="form-control" id="content" v-model="audio.content" rows="3"></textarea>
+              <div class="d-flex justify-content-start"><small class="form-text text-muted">説明文はは250文字以内です。</small></div>
+              <div class="alert alert-danger mt-2" role="alert" v-if="errors.content.required">
+                入力は必須です！
+              </div>
+              <div class="alert alert-danger mt-2" role="alert" v-if="errors.content.size">
+                250文字以内でお願いします！
+              </div>
             </div>
 
             <div class="form-group">
@@ -47,7 +62,7 @@
                 <span>{{audio.fileName}}</span>
               </label>
               <div class="d-flex justify-content-start"><small class="form-text text-muted">ファイル形式は MP3 のみアップロードできます。</small></div>
-              <div class="d-flex justify-content-start"><small class="form-text text-muted">ファイルの上限サイズは5MBです。</small></div>
+              <div class="d-flex justify-content-start"><small class="form-text text-muted">ファイルの上限サイズは7MBです。</small></div>
               <div class="alert alert-danger" role="alert" v-if="errors.audio_url.required">
                 ファイルが選択されていません!
               </div>
@@ -55,7 +70,7 @@
                 ファイル形式は MP3 ファイルのみです!
               </div>
               <div class="alert alert-danger" role="alert" v-if="errors.audio_url.size">
-                ファイルの上限サイズ5MBを超えています!
+                ファイルの上限サイズ7MBを超えています!
               </div>
             </div>
 
@@ -123,6 +138,11 @@ export default {
       errors: { //バリデーションエラー
         title: {
           required: false,
+          size: false
+        },
+        content: {
+          required: false,
+          size: false
         },
         price: {
           required: false,
@@ -161,8 +181,8 @@ export default {
       if (this.audio.file.type != 'audio/mpeg') {
         this.errors.audio_url.isFile = true
       }
-      // ファイルサイズ5MB以下のみを許可するバリデーション
-      if (this.audio.file.size > 5000000) {
+      // ファイルサイズ7MB以下のみを許可するバリデーション
+      if (this.audio.file.size > 7000000) {
         this.errors.audio_url.size = true
       }
     },
@@ -170,6 +190,9 @@ export default {
 
       // 初期化
       this.errors.title.required = false
+      this.errors.title.size = false
+      this.errors.content.required = false
+      this.errors.content.size = false
       this.errors.price.required = false
       this.errors.audio_url.required = false
       this.errors.audio_url.isFlie = false
@@ -178,7 +201,7 @@ export default {
 
       // バリデーション
       this.validate();
-      if(this.errors.title.required || this.errors.price.required || this.errors.audio_url.required || this.errors.audio_url.isFile || this.errors.audio_url.size)
+      if(this.errors.title.required || this.errors.title.size || this.errors.content.required || this.errors.content.size ||this.errors.price.required || this.errors.audio_url.required || this.errors.audio_url.isFile || this.errors.audio_url.size)
       {
         return
       }
@@ -186,6 +209,7 @@ export default {
 
       let data = new FormData();
       data.append("title", this.audio.title);
+      data.append("content", this.audio.content);
       data.append("price", this.audio.price);
       data.append("audio_file", this.audio.file);
       data.append("sound_id", this.audio.sound_id);
@@ -214,6 +238,15 @@ export default {
 
       if (!this.audio.title) {
         this.errors.title.required = true
+      }
+      if (this.audio.title.length > 100) {
+        this.errors.title.size = true
+      }
+      if (!this.audio.content) {
+        this.errors.content.required = true
+      }
+      if (this.audio.content.length > 100) {
+        this.errors.content.size = true
       }
       if (!this.audio.price) {
         this.errors.price.required = true
@@ -297,6 +330,7 @@ export default {
           fileName: '',
           id : this.$store.state.audio.userAudio.audio.id,
           title : this.$store.state.audio.userAudio.audio.title,
+          content : this.$store.state.audio.userAudio.audio.content,
           price : this.$store.state.audio.userAudio.audio.price,
           audio_file : this.$store.state.audio.userAudio.audio.audio_file,
           sound_id : this.$store.state.audio.userAudio.audio.sound_id,

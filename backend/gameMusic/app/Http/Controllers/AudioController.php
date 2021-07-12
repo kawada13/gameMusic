@@ -24,6 +24,7 @@ class AudioController extends Controller
     // オーディオ作成
     public function store(AudioRequest $request) {
 
+
         DB::beginTransaction();
 
         try {
@@ -32,6 +33,7 @@ class AudioController extends Controller
             $audio->user_id = Auth::id();
             $audio->sound_id = $request->sound_id;
             $audio->title = $request->title;
+            $audio->content = $request->content;
             $audio->price = $request->price;
 
             // 以下オーディオファイルの保存
@@ -310,6 +312,7 @@ class AudioController extends Controller
             // まずはオーディオテーブルを更新
             $audio->sound_id = $request->sound_id;
             $audio->title = $request->title;
+            $audio->content = $request->content;
             $audio->price = $request->price;
 
             // 以下オーディオファイルの保存

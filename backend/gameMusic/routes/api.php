@@ -53,6 +53,8 @@ Route::post('/searchIndex', 'RecruitmentController@searchIndex')->name('audio.se
 
 
 
+
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
@@ -106,7 +108,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
     // 購入
-    Route::post('{id}/purchase', 'PurchaseRecordController@purchase')->name('purchase');
+    // Route::post('{id}/purchase', 'PurchaseRecordController@purchase')->name('purchase');
     // あるオーディオを購入済かどうかチェック
     Route::get('{id}/isPurchase', 'PurchaseRecordController@isPurchase')->name('isPurchase');
     // ログインユーザーの購入オーディオ一覧
@@ -145,5 +147,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('loginuser/recruitments', 'RecruitmentController@loginuUserIndex')->name('recruitment.loginuUserIndex');
     // ログインユーザーの特定の募集を取得
     Route::get('recruitment/edit/{id}', 'RecruitmentController@edit')->name('recruitment.edit');
+
+
+    // ログインユーザーのお知らせ一覧
+    Route::get('announcements', 'AnnouncementController@index')->name('announcements');
 
 });
