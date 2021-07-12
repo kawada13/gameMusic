@@ -8,6 +8,9 @@ const getters = {}
 const mutations = {
   setChatRooms(state, data) {
     state.chatRooms = data.chat_rooms
+    state.chatRooms.forEach((o,i) => {
+      o.count = data.chat_message_count[i]
+    });
   },
   setChatMessages(state, data) {
     state.chatMessages = data.chat_messages
@@ -30,7 +33,6 @@ const actions = {
   async getChatRooms({ commit }) {
     await axios.get(`/api/chatRooms`)
     .then(res => {
-      console.log(res.data);
       commit('setChatRooms', res.data)
     })
     .catch(e => {

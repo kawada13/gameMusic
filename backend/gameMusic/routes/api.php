@@ -148,4 +148,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // ログインユーザーの特定の募集を取得
     Route::get('recruitment/edit/{id}', 'RecruitmentController@edit')->name('recruitment.edit');
 
+
+    // ログインユーザーのお知らせ一覧
+    Route::get('announcements', 'AnnouncementController@index')->name('announcements');
+
 });

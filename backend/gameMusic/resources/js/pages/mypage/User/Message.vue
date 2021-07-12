@@ -100,6 +100,12 @@ export default {
       },
     }
   },
+  watch: {
+      '$route': function () {
+       this.getChatMessagesData();
+       this.getUserData();
+       }
+  },
   computed: {
     getItems() { //ページネーション用(1ページに表示する数)
         let current = this.paginateData.currentPage * this.paginateData.parPage;
@@ -264,7 +270,7 @@ export default {
     /*画面サイズが768px以上の場合読み込む（PC）*/
 
     .trash {
-      margin-left: 630px;
+      margin-left: 623px;
     }
     .trash:hover {
       cursor: pointer;

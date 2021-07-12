@@ -13,14 +13,55 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="isAuth">
               <i class="fas fa-user-alt text-white"></i>
             </a>
-            <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" @click="$router.push({ name: 'profile' })">マイページ</a>
               <a class="dropdown-item" @click="logout()">ログアウト</a>
             </div>
           </li>
 
 
-          <a class="nav-item nav-link text-white" @click="$router.push({ name: 'favorite-audios' })" v-if="isAuth"><i class="far fa-star text-white mr-2"></i>お気に入り</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle aa" id="ii" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="isAuth">
+              <button class="btn btn-default btn-lg btn-link" style="text-decoration: none;font-size:13px; padding: 0;">
+                <span class="glyphicon glyphicon-envelope"><i class="far fa-bell text-white" style="font-size: 22px"></i></span>
+                <span class="badge badge-light" v-if="announcements.filter(o => o.is_read == 0).length !== 0">{{announcements.filter(o => o.is_read == 0).length}}</span>
+              </button>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ii" v-if="announcements.length">
+
+              <div v-for="(announcement, i) in announcements" :key="i">
+                <a class="dropdown-item"  v-if="announcement.is_read == 0" @click="$router.push({ name: 'message', params: { id: `${announcement.from_user_id}` }})">
+                  <p style="margin-bottom: 0; font-weight: bold;">{{ announcement.title }}</p>
+                  <small id="emailHelp" class="form-text text-muted">{{announcement.created_at | fromiso}}</small>
+                </a>
+                <a class="dropdown-item" v-if="announcement.is_read == 1" @click="$router.push({ name: 'message', params: { id: `${announcement.from_user_id}` }})">
+                  <p style="margin-bottom: 0;">{{ announcement.title }}</p>
+                  <small id="emailHelp" class="form-text text-muted">{{announcement.created_at | fromiso}}</small>
+                </a>
+                
+
+
+                <!-- <a class="dropdown-item" v-for="(announcement, i) in announcements" :key="i">
+                  <p style="margin-bottom: 0; font-weight: bold;" v-if="announcement.is_read == 0" @click="$router.push({ name: 'message', params: { id: `${announcement.from_user_id}` }})">{{ announcement.title }}</p>
+                  <p style="margin-bottom: 0;" v-if="announcement.is_read == 1" @click="$router.push({ name: 'message', params: { id: `${announcement.from_user_id}` }})">{{ announcement.title }}</p>
+                  <small id="emailHelp" class="form-text text-muted" @click="$router.push({ name: 'message', params: { id: `${announcement.from_user_id}` }})">{{announcement.created_at | fromiso}}</small>
+                </a> -->
+              </div>
+              
+
+            </div>
+
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ii" v-if="!announcements.length">
+              <a class="dropdown-item poyo">お知らせはまだありません。</a>
+            </div>
+
+          </li>
+
+
+
+
+          <a class="nav-item nav-link text-white" @click="$router.push({ name: 'favorite-audios' })" v-if="isAuth" style="padding-left: 0;"><i class="far fa-star text-white mr-2"></i>お気に入り</a>
           <a class="nav-item nav-link text-white" @click="$router.push({ name: 'audio-create' })" v-if="isAuth"><i class="fas fa-music mr-2 text-white"></i>出品する</a>
           <a class="nav-item nav-link text-white" @click="$router.push({ name: 'register' })" v-if="isGuest">会員登録</a>
           <a class="nav-item nav-link text-white" @click="$router.push({ name: 'login' })" v-if="isGuest">ログイン</a>
@@ -40,7 +81,10 @@ export default {
       options: {
           duration: 1500,
           type: 'info'
-      }
+      },
+      chatRooms: [],
+      messages:[],
+      announcements: []
     }
   },
   methods: {
@@ -107,6 +151,26 @@ export default {
     guesttoasted() {
       this.$toasted.show('ゲストユーザーとしてログインしました。', this.options);
     },
+    async getChatRoomsData() {
+      try{
+        await this.$store.dispatch('chat/getChatRooms')
+        this.chatRooms = this.$store.state.chat.chatRooms
+        this.messages = this.chatRooms.filter(o => {
+          return o.count !== 0
+        })
+      }
+      catch(e){
+        console.log(e);
+      }
+      finally{
+      }
+    },
+    async getAnnouncementData() {
+      axios.get('/api/announcements')
+      .then(res => {
+        this.announcements = res.data.announcements
+      })
+    },
   },
   computed: {
     isAuth() {
@@ -132,6 +196,20 @@ export default {
     },
   },
   created() {
+    Promise.all([
+      this.getChatRoomsData(),
+      this.getAnnouncementData(),
+    ])
+    Echo.channel('ChatRoomChannel')
+        .listen('ChatPusher', (e) => {
+            this.getChatRoomsData();
+            this.getAnnouncementData();
+
+        });
+    Echo.channel('ChatReadChannel')
+        .listen('ChatRegistered', (e) => {
+            this.getAnnouncementData();
+        });
   },
 
 }
@@ -149,5 +227,17 @@ export default {
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
+}
+.btn-default >.badge-light{
+   background:red;
+   position:relative;
+   top: -14px;
+   left: -5px;
+}
+.aa:after {
+  display: none!important;
+}
+.poyo:hover {
+  cursor: auto;
 }
 </style>

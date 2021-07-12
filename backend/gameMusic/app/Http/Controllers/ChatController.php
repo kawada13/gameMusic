@@ -12,6 +12,7 @@ use App\ChatRoom;
 use App\ChatRoomUser;
 use App\ChatMessage;
 use App\User;
+use App\Announcement;
 
 // リクエスト
 use App\Http\Requests\ChatRequest;
@@ -19,6 +20,7 @@ use App\Http\Requests\ChatRequest;
 
 // イベント
 use App\Events\ChatPusher;
+use App\Events\ChatRegistered;
 
 class ChatController extends Controller
 {
@@ -69,6 +71,14 @@ class ChatController extends Controller
         $chat->message = $request->message;
         $chat->save();
 
+
+        // お知らせテーブルに登録
+        $announcement = new Announcement();
+        $announcement->user_id = $id;
+        $announcement->from_user_id = Auth::id();
+        $announcement->title = Auth::user()->name . 'さんからメッセージがありました。';
+        $announcement->save();
+
         event(new ChatPusher($chat));
 
 
@@ -89,6 +99,7 @@ class ChatController extends Controller
                                     ->latest()
                                     ->where('user_id', Auth::id())
                                     ->pluck('chat_room_id');
+            
 
             $chat_rooms = ChatRoomUser::with(['user' => function($query){
                                         $query->with('userInformation');
@@ -97,10 +108,24 @@ class ChatController extends Controller
                                     ->where('user_id', '<>', Auth::id())
                                     ->latest()
                                     ->get();
+            
+            $chat_message_count = [];
+
+            foreach($chat_rooms as $chat_room){
+                $message_count = ChatMessage::where('chat_room_id', $chat_room->chat_room_id)
+                                    ->where('user_id', '<>', Auth::id())
+                                    ->where('is_read', 0)
+                                    ->get()
+                                    ->count();
+
+                array_push($chat_message_count,$message_count);
+            }
+
 
             return response()->json([
                 'message' => '成功',
-                'chat_rooms' => $chat_rooms
+                'chat_rooms' => $chat_rooms,
+                'chat_message_count' => $chat_message_count,
             ], 200);
 
         }
@@ -115,6 +140,7 @@ class ChatController extends Controller
 
      // ある相手とのチャット履歴取得
     public function chatMessages($id){
+
 
         try {
 
@@ -142,6 +168,38 @@ class ChatController extends Controller
                                             ->where('chat_room_id', $chat_room_id)
                                             ->latest()
                                             ->get();
+
+
+
+                // 上記の$chat_messagesの中から自分のメッセージ以外のチャットを取得
+                $to_chat_messages = ChatMessage::with(['user' => function($query){
+                                        $query->with('userInformation');
+                                    }])
+                                    ->where('chat_room_id', $chat_room_id)
+                                    ->where('user_id', '<>', Auth::id())
+                                    ->get();
+
+
+
+
+                // みたやつを既読にする
+                foreach($to_chat_messages as $to_chat_message){
+                    $to_chat_message->is_read = 1;
+                    $to_chat_message->save();
+                 }
+
+                //  アナウンステーブルの方も既読にする
+                $announcements = Announcement::where('user_id', Auth::id())
+                                               ->where('from_user_id', $id)
+                                               ->get();
+                foreach($announcements as $announcement){
+                    $announcement->is_read = 1;
+                    $announcement->save();
+                 }
+
+                 $chat = ChatMessage::find(1);
+
+                 event(new ChatRegistered($chat));
 
                 return response()->json([
                     'message' => '成功',

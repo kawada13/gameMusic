@@ -10,7 +10,6 @@
         <h3 class="card-header">
           メッセージ一覧
         </h3>
-
         <div class="no_user my-4 text-center" v-if="chatRooms.length == 0">
           <p>現在メッセージのやりとりがありません。</p>
         </div>
@@ -38,8 +37,9 @@
               </div>
 
               <div class="col-sm-3 col-xs-12 d-flex align-items-center">
-                <a type="button" class="btn btn-primary text-light" @click="$router.push({ name: 'message', params: { id: `${chatRoom.user_id}` }})">メッセージ</a>
+                <a type="button" class="btn btn-primary text-light" @click="$router.push({ name: 'message', params: { id: `${chatRoom.user_id}` }})">メッセージ<span class="badge badge-success ml-2" v-if="chatRoom.count !== 0">{{chatRoom.count}}</span></a>
               </div>
+
             </div>
           </li>
         </ul>
@@ -75,6 +75,11 @@ export default {
     Promise.all([
       this.getChatRoomsData(),
     ])
+    Echo.channel('ChatRoomChannel')
+        .listen('ChatPusher', (e) => {
+            this.getChatRoomsData();
+
+        });
   },
 
 }

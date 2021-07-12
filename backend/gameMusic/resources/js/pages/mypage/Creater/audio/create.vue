@@ -29,6 +29,18 @@
             </div>
 
             <div class="form-group">
+              <label for="content" class="weight">説明<span class="badge badge-danger ml-2">必須</span></label>
+              <textarea class="form-control" id="content" v-model="formInfo.content" rows="3"></textarea>
+              <div class="d-flex justify-content-start"><small class="form-text text-muted">説明文はは250文字以内です。</small></div>
+              <div class="alert alert-danger mt-2" role="alert" v-if="errors.content.required">
+                入力は必須です！
+              </div>
+              <div class="alert alert-danger mt-2" role="alert" v-if="errors.content.size">
+                250文字以内でお願いします！
+              </div>
+            </div>
+
+            <div class="form-group">
               <div><label for="price" class="weight">価格<span class="badge badge-danger ml-2">必須</span></label></div>
               <input type="number" class="form-control form-control-lg" id="price" v-model="formInfo.price">
               <div class="alert alert-danger mt-2" role="alert" v-if="errors.price.required">
@@ -123,6 +135,10 @@ export default {
           required: false,
           size: false,
         },
+        content: {
+          required: false,
+          size: false,
+        },
         price: {
           required: false,
         },
@@ -137,6 +153,7 @@ export default {
       },
       formInfo: {
         title: '',
+        content: '',
         price: '',
         audio:{
           url: '', //ファイル名
@@ -183,6 +200,9 @@ export default {
 
       // 初期化
       this.errors.title.required = false
+      this.errors.title.size = false
+      this.errors.content.required = false
+      this.errors.content.size = false
       this.errors.price.required = false
       this.errors.audio_url.required = false
       this.errors.audio_url.isFlie = false
@@ -191,7 +211,7 @@ export default {
 
       // バリデーション
       this.validate();
-      if(this.errors.title.required || this.errors.title.size ||this.errors.price.required || this.errors.audio_url.required || this.errors.audio_url.isFile || this.errors.audio_url.size)
+      if(this.errors.title.required || this.errors.title.size || this.errors.content.required || this.errors.content.size ||this.errors.price.required || this.errors.audio_url.required || this.errors.audio_url.isFile || this.errors.audio_url.size)
       {
         return
       }
@@ -199,6 +219,7 @@ export default {
 
       let data = new FormData();
       data.append("title", this.formInfo.title);
+      data.append("content", this.formInfo.content);
       data.append("price", this.formInfo.price);
       data.append("audio_file", this.formInfo.audio.file_info);
       data.append("sound_id", this.formInfo.sound);
@@ -229,6 +250,12 @@ export default {
       }
       if (this.formInfo.title.length > 100) {
         this.errors.title.size = true
+      }
+      if (!this.formInfo.content) {
+        this.errors.content.required = true
+      }
+      if (this.formInfo.content.length > 250) {
+        this.errors.content.size = true
       }
       if (!this.formInfo.price) {
         this.errors.price.required = true
