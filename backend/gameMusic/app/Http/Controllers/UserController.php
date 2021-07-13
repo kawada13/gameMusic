@@ -19,6 +19,12 @@ use App\Http\Requests\UserInformationRequest;
 use App\UserInformation;
 use App\User;
 use App\Audio;
+use App\Announcement;
+use App\ChatMessage;
+
+// イベント
+use App\Events\ChatPusher;
+use App\Events\ChatRegistered;
 
 class UserController extends Controller
 {
@@ -126,6 +132,26 @@ class UserController extends Controller
                                 ->latest()
                                 ->take(2)
                                 ->get();
+
+
+            if(Auth::id() !== $user->id) {
+
+
+                $announcements = Announcement::where('user_id', Auth::id())
+                    ->where('is_read', 0)
+                    ->where('type', 2)
+                    ->get();
+
+                foreach($announcements as $announcement){
+                    $announcement->is_read = 1;
+                    $announcement->save();
+                }
+
+                $chat = ChatMessage::find(1);
+
+                event(new ChatRegistered($chat));
+
+            }
 
             return response()->json([
                 'user' => $user,
