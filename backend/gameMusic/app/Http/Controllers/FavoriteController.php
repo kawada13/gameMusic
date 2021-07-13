@@ -13,6 +13,14 @@ use App\AudioInstrument;
 use App\AudioUnderstanding;
 use App\AudioUse;
 use App\Favorite;
+use App\ChatRoom;
+use App\ChatRoomUser;
+use App\ChatMessage;
+use App\Announcement;
+
+// イベント
+use App\Events\ChatPusher;
+use App\Events\ChatRegistered;
 
 class FavoriteController extends Controller
 {
@@ -34,6 +42,20 @@ class FavoriteController extends Controller
 
             $audio->favorite_users()->attach(Auth::id());
 
+            // お知らせテーブルに登録
+            $announcement = new Announcement();
+            $announcement->user_id = $audio->user->id;
+            $announcement->from_user_id = Auth::id();
+            $announcement->title = $audio->title . 'がお気に入りされました。';
+            $announcement->type = 1;
+            $announcement->to_audio = $id;
+            $announcement->save();
+
+            $chat = ChatMessage::find(1);
+
+            event(new ChatRegistered($chat));
+
+
             return response()->json([
                 'message' => '成功',
             ],200);
@@ -51,6 +73,20 @@ class FavoriteController extends Controller
         try{
             $audio = Audio::find($id);
             $audio->favorite_users()->detach(Auth::id());
+
+            // お知らせテーブルから該当データ削除
+            // $announcements = Announcement::where('to_audio', $id)
+            //                                 ->where('type', 1)
+            //                                 ->get();
+
+            // foreach($announcements as $announcement){
+            //     $announcement->delete();
+            // }
+
+            // $chat = ChatMessage::find(1);
+
+            // event(new ChatRegistered($chat));
+
             return response()->json([
                 'message' => '成功',
             ],200);

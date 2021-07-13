@@ -191,6 +191,7 @@ class ChatController extends Controller
                 //  アナウンステーブルの方も既読にする
                 $announcements = Announcement::where('user_id', Auth::id())
                                                ->where('from_user_id', $id)
+                                               ->where('type', 0)
                                                ->get();
                 foreach($announcements as $announcement){
                     $announcement->is_read = 1;

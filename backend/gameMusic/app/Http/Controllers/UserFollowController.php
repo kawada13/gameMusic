@@ -13,6 +13,13 @@ use App\Audio;
 use App\AudioInstrument;
 use App\AudioUnderstanding;
 use App\AudioUse;
+use App\Announcement;
+use App\ChatMessage;
+
+// イベント
+use App\Events\ChatPusher;
+use App\Events\ChatRegistered;
+
 
 class UserFollowController extends Controller
 {
@@ -41,6 +48,18 @@ class UserFollowController extends Controller
 
             $user->followers()->attach(Auth::id());
 
+            // お知らせテーブルに登録
+            $announcement = new Announcement();
+            $announcement->user_id = $id;
+            $announcement->from_user_id = Auth::id();
+            $announcement->title = Auth::user()->name . 'にフォローされました。';
+            $announcement->type = 2;
+            $announcement->save();
+
+            $chat = ChatMessage::find(1);
+
+            event(new ChatRegistered($chat));
+
             return response()->json([
                 'message' => '成功',
             ],200);
@@ -58,6 +77,22 @@ class UserFollowController extends Controller
         try{
             $user = User::find($id);
             $user->followers()->detach(Auth::id());
+
+
+            // お知らせテーブルから該当データ削除
+            // $announcements = Announcement::where('user_id', $id)
+            //                                 ->where('type', 2)
+            //                                 ->get();
+
+            // foreach($announcements as $announcement){
+            //     $announcement->delete();
+            // }
+
+            // $chat = ChatMessage::find(1);
+
+            // event(new ChatRegistered($chat));
+
+
             return response()->json([
                 'message' => '成功',
             ],200);

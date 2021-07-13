@@ -31,22 +31,38 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ii" v-if="announcements.length">
 
               <div v-for="(announcement, i) in announcements" :key="i">
-                <a class="dropdown-item"  v-if="announcement.is_read == 0" @click="$router.push({ name: 'message', params: { id: `${announcement.from_user_id}` }})">
+
+                <!-- メッセージ表示 -->
+                <a class="dropdown-item"  v-if="announcement.is_read == 0 && announcement.type == 0" @click="$router.push({ name: 'message', params: { id: `${announcement.from_user_id}` }})">
                   <p style="margin-bottom: 0; font-weight: bold;">{{ announcement.title }}</p>
                   <small id="emailHelp" class="form-text text-muted">{{announcement.created_at | fromiso}}</small>
                 </a>
-                <a class="dropdown-item" v-if="announcement.is_read == 1" @click="$router.push({ name: 'message', params: { id: `${announcement.from_user_id}` }})">
+                <a class="dropdown-item" v-if="announcement.is_read == 1 && announcement.type == 0" @click="$router.push({ name: 'message', params: { id: `${announcement.from_user_id}` }})">
                   <p style="margin-bottom: 0;">{{ announcement.title }}</p>
                   <small id="emailHelp" class="form-text text-muted">{{announcement.created_at | fromiso}}</small>
                 </a>
-                
+
+                <!-- お気に入り表示 -->
+                <a class="dropdown-item"  v-if="announcement.is_read == 0 && announcement.type == 1" @click="$router.push({ name: 'audio-show', params: { id: `${announcement.to_audio}` } })">
+                  <p style="margin-bottom: 0; font-weight: bold;">{{ announcement.title }}</p>
+                  <small id="emailHelp" class="form-text text-muted">{{announcement.created_at | fromiso}}</small>
+                </a>
+                <a class="dropdown-item" v-if="announcement.is_read == 1 && announcement.type == 1" @click="$router.push({ name: 'audio-show', params: { id: `${announcement.to_audio}` } })">
+                  <p style="margin-bottom: 0;">{{ announcement.title }}</p>
+                  <small id="emailHelp" class="form-text text-muted">{{announcement.created_at | fromiso}}</small>
+                </a>
+
+                <!-- フォロー表示 -->
+                <a class="dropdown-item"  v-if="announcement.is_read == 0 && announcement.type == 2" @click="$router.push({ name: 'user-show', params: { id: `${announcement.from_user_id}` }})">
+                  <p style="margin-bottom: 0; font-weight: bold;">{{ announcement.title }}</p>
+                  <small id="emailHelp" class="form-text text-muted">{{announcement.created_at | fromiso}}</small>
+                </a>
+                <a class="dropdown-item" v-if="announcement.is_read == 1 && announcement.type == 2" @click="$router.push({ name: 'user-show', params: { id: `${announcement.from_user_id}` }})">
+                  <p style="margin-bottom: 0;">{{ announcement.title }}</p>
+                  <small id="emailHelp" class="form-text text-muted">{{announcement.created_at | fromiso}}</small>
+                </a>
 
 
-                <!-- <a class="dropdown-item" v-for="(announcement, i) in announcements" :key="i">
-                  <p style="margin-bottom: 0; font-weight: bold;" v-if="announcement.is_read == 0" @click="$router.push({ name: 'message', params: { id: `${announcement.from_user_id}` }})">{{ announcement.title }}</p>
-                  <p style="margin-bottom: 0;" v-if="announcement.is_read == 1" @click="$router.push({ name: 'message', params: { id: `${announcement.from_user_id}` }})">{{ announcement.title }}</p>
-                  <small id="emailHelp" class="form-text text-muted" @click="$router.push({ name: 'message', params: { id: `${announcement.from_user_id}` }})">{{announcement.created_at | fromiso}}</small>
-                </a> -->
               </div>
               
 
