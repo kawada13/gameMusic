@@ -42,12 +42,9 @@ URL： http://game-music.fun/
  
 ・ゲームサウンド購入&購入履歴確認  
 　⇨Stripeを使った決済。購入ページにて自身のカード情報を入力し、単発決済。  
- 
- <img src="https://user-images.githubusercontent.com/61454264/125234353-83376580-e31b-11eb-999a-8b9f97afe812.gif" width="700">  
- 
  選んだ商品はStripeの決済フォームからクレジットカード情報を入力して、購入することができます。  
  
- <img src="https://user-images.githubusercontent.com/61454264/123971382-f2948780-d9f4-11eb-85d9-a92e2f6f9bc8.gif" width="700">  
+ <img src="https://user-images.githubusercontent.com/61454264/125234353-83376580-e31b-11eb-999a-8b9f97afe812.gif" width="700">  
  
  
  
