@@ -62,6 +62,17 @@
                   <small id="emailHelp" class="form-text text-muted">{{announcement.created_at | fromiso}}</small>
                 </a>
 
+                <!-- 購入 -->
+                <a class="dropdown-item"  v-if="announcement.is_read == 0 && announcement.type == 3" @click="$router.push({ name: 'audio-show', params: { id: `${announcement.to_audio}` } })">
+                  <p style="margin-bottom: 0; font-weight: bold;">{{ announcement.title }}</p>
+                  <small id="emailHelp" class="form-text text-muted">{{announcement.created_at | fromiso}}</small>
+                </a>
+                <a class="dropdown-item" v-if="announcement.is_read == 1 && announcement.type == 3" @click="$router.push({ name: 'audio-show', params: { id: `${announcement.to_audio}` } })">
+                  <p style="margin-bottom: 0;">{{ announcement.title }}</p>
+                  <small id="emailHelp" class="form-text text-muted">{{announcement.created_at | fromiso}}</small>
+                </a>
+
+
 
               </div>
               

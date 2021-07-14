@@ -17,6 +17,12 @@ use App\AudioInstrument;
 use App\AudioUnderstanding;
 use App\AudioUse;
 use App\PurchaseRecord;
+use App\ChatMessage;
+use App\Announcement;
+
+// イベント
+use App\Events\ChatPusher;
+use App\Events\ChatRegistered;
 
 class PurchaseRecordController extends Controller
 {
@@ -34,11 +40,24 @@ class PurchaseRecordController extends Controller
             $PurchaseRecord->price = $audio->price;
             $PurchaseRecord->save();
 
+            // お知らせテーブルに登録
+            $announcement = new Announcement();
+            $announcement->user_id = $audio->user->id;
+            $announcement->from_user_id = Auth::id();
+            $announcement->title = $audio->title . 'が購入されました。';
+            $announcement->type = 3;
+            $announcement->to_audio = $id;
+            $announcement->save();
+
+            $chat = ChatMessage::find(1);
+
+            event(new ChatRegistered($chat));
+
 
             return redirect('http://game-music.fun/mypage/user/purchase_history');
 
     }
-
+    
 
 
     // ストライプチェックアウト

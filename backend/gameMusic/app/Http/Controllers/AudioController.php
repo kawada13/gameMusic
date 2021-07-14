@@ -219,6 +219,17 @@ class AudioController extends Controller
                     $announcement->save();
                 }
 
+                $announcements_purchase = Announcement::where('user_id', Auth::id())
+                    ->where('is_read', 0)
+                    ->where('type', 3)
+                    ->where('to_audio', $id)
+                    ->get();
+
+                foreach($announcements_purchase as $announcement){
+                    $announcement->is_read = 1;
+                    $announcement->save();
+                }
+
                 $chat = ChatMessage::find(1);
 
                 event(new ChatRegistered($chat));
