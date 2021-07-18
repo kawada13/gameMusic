@@ -182,7 +182,13 @@ URL： http://game-music.fun/
 | transfer_accounts  | ユーザー口座情報  |
 | users  | ユーザー情報  |
 | user_informations  | ユーザープロフィール情報  |
-| user_follows  | ユーザーフォロー情報  |
+| user_follows  | ユーザーフォロー情報  |  
+
+
+### AWS構成図
+<img width="816" alt="スクリーンショット 2021-07-18 16 58 47" src="https://user-images.githubusercontent.com/61454264/126060155-6f2fe0f5-73d1-4a3c-9eb3-046045e1fc89.png">
+
+
 
 
 
