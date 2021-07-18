@@ -9,6 +9,8 @@
     </p>
   </div>
 
+  <p>{{aaa}}</p>
+
 
   <!-- ローディング中 -->
   <div class="my-5" v-if="loading">
@@ -193,7 +195,7 @@ export default {
       isLogined: false, //現在このページを見ているユーザーがログインしているかどうか
       isFollowed: false, //このページを見ているログインユーザーが既にこのユーザーををフォロー済かどうか
       isMine: false, //このページがログインユーザー自身のページかどうか
-      isPurchase: false //この商品をログインユーザーが購入済かどうか
+      isPurchase: false, //この商品をログインユーザーが購入済かどうか
     }
   },
   computed: {
@@ -207,7 +209,8 @@ export default {
   },
   methods: {
     async checkout() {
-      const url = `http://game-music.fun/${this.$route.params.id}/checkout`
+      // const url = `http://game-music.fun/${this.$route.params.id}/checkout`
+      const url = `http://localhost/${this.$route.params.id}/checkout`
       window.location.href = url
     },
     async follow(userId) {

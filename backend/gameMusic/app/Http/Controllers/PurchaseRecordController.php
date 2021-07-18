@@ -51,10 +51,19 @@ class PurchaseRecordController extends Controller
 
             $chat = ChatMessage::find(1);
 
+            if($chat == null) {
+                $chat = new ChatMessage;
+                $chat->chat_room_id = 1;
+                $chat->user_id = 2;
+                $chat->message = 'テスト';
+                $chat->save();
+            }
+
             event(new ChatRegistered($chat));
 
 
-            return redirect('http://game-music.fun/mypage/user/purchase_history');
+            // return redirect('http://game-music.fun/mypage/user/purchase_history');
+            return redirect('http://localhost/mypage/user/purchase_history');
 
     }
     
@@ -72,7 +81,8 @@ class PurchaseRecordController extends Controller
 
             // 自身の作品だったらアウト
             if($audio->user_id == Auth::id()) {
-                return redirect('http://game-music.fun/audios/'. $id);
+                // return redirect('http://game-music.fun/audios/'. $id);
+                return redirect('http://localhost/audios/'. $id);
             }
 
             // 重複購入アウト
@@ -80,7 +90,8 @@ class PurchaseRecordController extends Controller
                                     ->where('user_id', Auth::id())
                                     ->exists();
             if($is_purchased) {
-                return redirect('http://game-music.fun/audios/'. $id);
+                // return redirect('http://game-music.fun/audios/'. $id);
+                return redirect('http://localhost/audios/'. $id);
             }
 
             $item = [
@@ -95,8 +106,10 @@ class PurchaseRecordController extends Controller
             $session = \Stripe\Checkout\Session::create([
                 'payment_method_types' => ['card'],
                 'line_items'           => [$item],
-                'success_url'          => 'http://game-music.fun/' . $id . '/purchase',
-                'cancel_url'           => 'http://game-music.fun/audios/'. $id,
+                // 'success_url'          => 'http://game-music.fun/' . $id . '/purchase',
+                'success_url'          => 'http://localhost/' . $id . '/purchase',
+                // 'cancel_url'           => 'http://game-music.fun/audios/'. $id,
+                'cancel_url'           => 'http://localhost/audios/'. $id,
             ]);
 
             return view('cart.checkout', [
