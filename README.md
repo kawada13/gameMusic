@@ -42,12 +42,9 @@ URL： http://game-music.fun/
  
 ・ゲームサウンド購入&購入履歴確認  
 　⇨Stripeを使った決済。購入ページにて自身のカード情報を入力し、単発決済。  
- 
- <img src="https://user-images.githubusercontent.com/61454264/123968660-6719f700-d9f2-11eb-924e-2f46d2e28f61.gif" width="700">  
- 
  選んだ商品はStripeの決済フォームからクレジットカード情報を入力して、購入することができます。  
  
- <img src="https://user-images.githubusercontent.com/61454264/123971382-f2948780-d9f4-11eb-85d9-a92e2f6f9bc8.gif" width="700">  
+ <img src="https://user-images.githubusercontent.com/61454264/125234353-83376580-e31b-11eb-999a-8b9f97afe812.gif" width="700">  
  
  
  
@@ -57,8 +54,13 @@ URL： http://game-music.fun/
 ・フォロー&フォロー一覧確認  
 　⇨ユーザーをフォローする  
  
-・メッセージやり取り  
-　⇨ユーザー個人間で、メッセージのやりとりができます。音源募集をした後とかに詳しい内容のやりとり等で使われる想定です。  
+・メッセージやり取り(リアルタイムチャット)  
+　⇨ユーザー個人間で、メッセージのやりとりができます。音源募集をした後とかに詳しい内容のやりとり等で使われる想定です。 
+ 
+・お知らせ機能  
+　⇨チャットメッセージ、お気に入り、フォローが届いたらお知らせから確認できます。  
+ <img width="700" alt="スクリーンショット 2021-07-12 14 07 55" src="https://user-images.githubusercontent.com/61454264/125233933-9269e380-e31a-11eb-994a-f6ac6698b1e9.png">
+
  
  <img src="https://user-images.githubusercontent.com/61454264/123975319-3210a300-d9f8-11eb-9269-b653462c3d17.gif" width="700">  
  
@@ -180,7 +182,13 @@ URL： http://game-music.fun/
 | transfer_accounts  | ユーザー口座情報  |
 | users  | ユーザー情報  |
 | user_informations  | ユーザープロフィール情報  |
-| user_follows  | ユーザーフォロー情報  |
+| user_follows  | ユーザーフォロー情報  |  
+
+
+### AWS構成図
+<img width="816" alt="スクリーンショット 2021-07-18 16 58 47" src="https://user-images.githubusercontent.com/61454264/126060155-6f2fe0f5-73d1-4a3c-9eb3-046045e1fc89.png">
+
+
 
 
 
