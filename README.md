@@ -186,7 +186,7 @@ URL： http://game-music.fun/
 
 
 ### AWS構成図
-<img width="816" alt="スクリーンショット 2021-07-18 16 58 47" src="https://user-images.githubusercontent.com/61454264/126060155-6f2fe0f5-73d1-4a3c-9eb3-046045e1fc89.png">
+<img width="821" alt="スクリーンショット 2021-07-18 17 08 08" src="https://user-images.githubusercontent.com/61454264/126060349-cd07a8f4-76dc-4ad3-a034-42f626713140.png">
 
 
 
