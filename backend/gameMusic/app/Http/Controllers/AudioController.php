@@ -232,6 +232,14 @@ class AudioController extends Controller
 
                 $chat = ChatMessage::find(1);
 
+                if($chat == null) {
+                    $chat = new ChatMessage;
+                    $chat->chat_room_id = 1;
+                    $chat->user_id = 2;
+                    $chat->message = 'テスト';
+                    $chat->save();
+                }
+
                 event(new ChatRegistered($chat));
 
             }
