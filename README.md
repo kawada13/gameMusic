@@ -172,6 +172,7 @@ URL： http://game-music.fun/
 | audio_instrument  | オーディオ機材の中間テーブル  |
 | audio_understanding  | オーディオイメージの中間テーブル  |
 | audio_use  | オーディオ用途の中間テーブル  |
+| announcements  | 通知、お知らせ情報テーブル  |
 | instruments  | 機材情報マスター  |
 | understandings  | イメージ情報マスター  |
 | uses  | 用途情報マスター  |
