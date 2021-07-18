@@ -28,12 +28,9 @@
             </div>
 
              <div class="form-group">
-              <label for="content" class="weight">説明<span class="badge badge-danger ml-2">必須</span></label>
+              <label for="content" class="weight">説明</label>
               <textarea class="form-control" id="content" v-model="audio.content" rows="3"></textarea>
               <div class="d-flex justify-content-start"><small class="form-text text-muted">説明文はは250文字以内です。</small></div>
-              <div class="alert alert-danger mt-2" role="alert" v-if="errors.content.required">
-                入力は必須です！
-              </div>
               <div class="alert alert-danger mt-2" role="alert" v-if="errors.content.size">
                 250文字以内でお願いします！
               </div>
@@ -42,8 +39,12 @@
             <div class="form-group">
               <div><label for="price" class="weight">価格<span class="badge badge-danger ml-2">必須</span></label></div>
               <input type="number" class="form-control form-control-lg" id="price" v-model="audio.price">
+              <div class="d-flex justify-content-start"><small class="form-text text-muted">設定価格は¥100~になります。</small></div>
               <div class="alert alert-danger mt-2" role="alert" v-if="errors.price.required">
                 入力は必須です！
+              </div>
+              <div class="alert alert-danger mt-2" role="alert" v-if="errors.price.min">
+                設定価格は¥100~でお願いします！
               </div>
             </div>
 
@@ -141,11 +142,11 @@ export default {
           size: false
         },
         content: {
-          required: false,
           size: false
         },
         price: {
           required: false,
+          min: false,
         },
         audio_url: {
           required: false,
@@ -191,9 +192,9 @@ export default {
       // 初期化
       this.errors.title.required = false
       this.errors.title.size = false
-      this.errors.content.required = false
       this.errors.content.size = false
       this.errors.price.required = false
+      this.errors.price.min = false
       this.errors.audio_url.required = false
       this.errors.audio_url.isFlie = false
       this.errors.audio_url.size = false
@@ -201,7 +202,7 @@ export default {
 
       // バリデーション
       this.validate();
-      if(this.errors.title.required || this.errors.title.size || this.errors.content.required || this.errors.content.size ||this.errors.price.required || this.errors.audio_url.required || this.errors.audio_url.isFile || this.errors.audio_url.size)
+      if(this.errors.title.required || this.errors.title.size || this.errors.content.required || this.errors.content.size ||this.errors.price.required ||this.errors.price.min || this.errors.audio_url.required || this.errors.audio_url.isFile || this.errors.audio_url.size)
       {
         return
       }
@@ -242,14 +243,16 @@ export default {
       if (this.audio.title.length > 100) {
         this.errors.title.size = true
       }
-      if (!this.audio.content) {
-        this.errors.content.required = true
-      }
-      if (this.audio.content.length > 100) {
+      if(this.audio.content) {
+        if (this.audio.content.length > 250) {
         this.errors.content.size = true
+       }
       }
       if (!this.audio.price) {
         this.errors.price.required = true
+      }
+      if (this.audio.price < 100) {
+        this.errors.price.min = true
       }
       if (!this.audio.file) {
         this.errors.audio_url.required = true
