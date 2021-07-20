@@ -7,10 +7,10 @@
 
 
     <div class="" v-if="!loading">
-      <div class="card-group mb-5">
+      <div class="card-group mb-2">
         <div class="card text-center">
           <div class="card-body earnings">
-            <h5 class="card-title">売上金額合計</h5>
+            <h5 class="card-title">申請可能金額</h5>
             <h1><i class="fas fa-yen-sign"></i>{{ earning | comma }}</h1>
           </div>
         </div>
@@ -20,6 +20,10 @@
             <h1><i class="fas fa-yen-sign"></i>{{ cumulative | comma }}</h1>
           </div>
         </div>
+      </div>
+
+      <div class="mb-5 d-flex justify-content-end fee">
+        <a class="font-weight-bold text-danger" @click="$router.push({ name: 'guide-payment' })">振込申請・手数料について</a>
       </div>
 
 
@@ -61,7 +65,8 @@ export default {
   data() {
     return {
       loading: false,
-      sales:[]
+      sales:[],
+      dialog: false
     }
   },
   computed: {
@@ -113,6 +118,10 @@ export default {
 
 <style scoped>
 
+.fee:hover {
+  cursor: pointer;
+}
+
 .earnings h1 {
   font-weight: bold;
   color: hsla(357, 100%, 37%, 0.979);
@@ -149,8 +158,6 @@ export default {
       font-size: 20px;
     }
 
-
-
 }
 @media screen and (min-width:768px){
     /*画面サイズが768px以上の場合読み込む（PC）*/
@@ -158,6 +165,7 @@ export default {
     .purchase_audio_title h3 {
       font-weight: bold;
     }
+
 
 }
 

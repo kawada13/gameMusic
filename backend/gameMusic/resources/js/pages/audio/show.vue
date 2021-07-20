@@ -9,8 +9,6 @@
     </p>
   </div>
 
-  <p>{{aaa}}</p>
-
 
   <!-- ローディング中 -->
   <div class="my-5" v-if="loading">
