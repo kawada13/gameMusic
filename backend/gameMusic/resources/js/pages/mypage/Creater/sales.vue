@@ -6,23 +6,6 @@
     </div>
 
 
-    <!-- <div class="" v-if="!loading">
-      <div class="card-group mb-2">
-        <div class="card text-center">
-          <div class="card-body earnings">
-            <h5 class="card-title">申請可能金額</h5>
-            <h1><i class="fas fa-yen-sign"></i>{{ earning | comma }}</h1>
-          </div>
-        </div>
-        <div class="card text-center">
-          <div class="card-body cumulative">
-            <h5 class="card-title">累計の売上金額</h5>
-            <h1><i class="fas fa-yen-sign"></i>{{ cumulative | comma }}</h1>
-          </div>
-        </div>
-      </div> -->
-
-      
 
 
       <div class="card purchase_audio_title">
@@ -30,33 +13,11 @@
           売上履歴
         </h3>
 
-        <!-- <div class="mb-5 d-flex justify-content-end fee">
-          <a class="font-weight-bold text-danger" @click="$router.push({ name: 'guide-payment' })">振込申請・手数料について</a>
-        </div> -->
 
         <div class="no_user my-4 text-center" v-if="sales.length == 0">
           <p>現在売上履歴がありません。</p>
         </div>
 
-        <!-- <div class="card-body purchase_audio_body" v-for="(sale, i) in sales" :key="i">
-          <h5 class="card-title audio_title" @click="$router.push({ name: 'audio-show', params: { id: `${sale.audio_id}` } })">{{sale.audio.title}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted creater_name" @click="$router.push({ name: 'user-show', params: { id: `${sale.user_id}` }})">購入ユーザー名：{{sale.user.name}}</h6>
-          <h6 class="card-subtitle mb-2 text-muted" >日付：{{sale.created_at | fromiso}}</h6>
-          <h6 class="card-subtitle mb-2 price font-weight-bold text-danger"><i class="fas fa-yen-sign"></i>{{sale.price | comma}}</h6>
-          
-          <div class="application_button">
-            <button type="button" class="btn btn-danger text-white" @click="$router.push({ name: 'payout', params: { id: `${sale.audio_id}` }})" v-if="sale.status == 0">
-              振込申請をする
-            </button>
-            <button type="button" class="btn btn-primary text-white withdrawn" v-if="sale.status == 1">
-              申請中
-            </button>
-            <button type="button" class="btn btn-secondary text-white withdrawn" v-if="sale.status == 2">
-              出金済み
-            </button>
-          </div>
-
-        </div> -->
 
         <div class="d-flex justify-content-center my-3 uriage" v-for="(sale, i) in getItems" :key="i">
           <div class="card" style="width: 37rem;">
@@ -68,9 +29,6 @@
               <p class="card-title mb-2">{{sale.created_at | fromiso}}</p>
               <p class="card-title subtitle">購入ユーザー</p>
               <p class="audio_title" @click="$router.push({ name: 'user-show', params: { id: `${sale.user_id}` }})">{{sale.user.name}}</p>
-              <button type="button" class="btn btn-danger text-white" @click="$router.push({ name: 'payout', params: { id: `${sale.audio_id}` }})" v-if="sale.status == 0">
-              振込申請をする
-            </button>
             </div>
           </div>
         </div>

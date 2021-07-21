@@ -152,4 +152,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // ログインユーザーのお知らせ一覧
     Route::get('announcements', 'AnnouncementController@index')->name('announcements');
 
+    // ログインユーザーの振込申請履歴一覧取得
+    Route::get('application/histroy', 'TransferRecordController@index')->name('applicationHistroy');
+
 });

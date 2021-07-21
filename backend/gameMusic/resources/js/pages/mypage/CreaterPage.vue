@@ -40,6 +40,7 @@
               <li class="list-group-item" @click="$router.push({ name: 'exhibited-audios' })">出品オーディオ</li>
               <li class="list-group-item" @click="$router.push({ name: 'transfer-account-setting' })">振込口座設定</li>
               <li class="list-group-item" @click="$router.push({ name: 'sales' })">売上履歴</li>
+              <li class="list-group-item" @click="$router.push({ name: 'application-history' })">振込申請履歴</li>
               <li class="list-group-item" @click="$router.push({ name: 'sales-application' })">振込申請</li>
               <li class="list-group-item" @click="$router.push({ name: 'guide-payment' })">出品・振込申請・手数料等について</li>
             </ul>

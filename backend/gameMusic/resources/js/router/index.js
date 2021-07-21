@@ -44,6 +44,7 @@ import AudioEdit from '../pages/mypage/Creater/audio/edit.vue'
 import Sales from '../pages/mypage/Creater/sales.vue'
 import SalesApplication from '../pages/mypage/Creater/salesApplication.vue'
 import GuidePayment from '../pages/mypage/Creater/guidePayment.vue'
+import ApplicationHistory from '../pages/mypage/Creater/applicationHistory.vue'
 import Payout from '../pages/mypage/Creater/payout.vue'
 
 // ユーザーぺーじ(中)
@@ -213,6 +214,11 @@ const routes = new VueRouter({
               path: 'guide/payment',
               component: GuidePayment,
               name:'guide-payment'
+            },
+            {
+              path: 'application/history',
+              component: ApplicationHistory,
+              name:'application-history'
             },
           ]
         }

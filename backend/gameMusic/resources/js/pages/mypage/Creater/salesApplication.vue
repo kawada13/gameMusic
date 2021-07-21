@@ -30,6 +30,9 @@
      <div class="d-flex justify-content-end fee">
           <a class="font-weight-bold text-primary saleshistory" @click="$router.push({ name: 'sales' })">売上履歴<i class="fas fa-chevron-right pl-2"></i></a>
     </div>
+     <div class="d-flex justify-content-end fee">
+          <a class="font-weight-bold text-primary saleshistory" @click="$router.push({ name: 'application-history' })">振込申請履歴<i class="fas fa-chevron-right pl-2"></i></a>
+    </div>
      <div class="mb-5 d-flex justify-content-end fee">
           <a class="font-weight-bold text-danger saleshistory" @click="$router.push({ name: 'guide-payment' })">振込申請・手数料について<i class="fas fa-chevron-right pl-2"></i></a>
     </div>

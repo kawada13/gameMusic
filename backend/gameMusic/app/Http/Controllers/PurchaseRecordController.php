@@ -182,6 +182,7 @@ class PurchaseRecordController extends Controller
                                     ->WhereHas('audio', function($q)  {
                                         $q->whereIn('user_id', [Auth::id()]);
                                     })
+                                    ->latest()
                                     ->get();
 
             return response()->json([

@@ -12,26 +12,21 @@ use App\TransferRecord;
 class TransferRecordController extends Controller
 {
     // 申請履歴作成
-    public function store(Request $request) {
+    public function index() {
 
-        DB::beginTransaction();
 
         try {
-            $transferRecord = new TransferRecord;
-            $transferRecord->user_id = Auth::id();
-            $transferRecord->price = $request->price;
-            $transferRecord->save();
+            $transferRecords = TransferRecord::where('user_id', Auth::id())
+                                                ->latest()
+                                                ->get();
 
-            DB::commit();
             return response()->json([
                 'message' => '成功',
-                'transferRecord' => $transferRecord
+                'transferRecords' => $transferRecords
             ],200);
         }
 
         catch (\Exception $e) {
-            // データベース巻き戻し
-            DB::rollback();
 
             return response()->json([
                 'message' => '失敗',

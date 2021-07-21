@@ -68,7 +68,7 @@ export default {
     Promise.all([
       this.getUser()
     ])
-    if(this.$route.name == 'exhibited-audios' || this.$route.name == 'transfer-account-setting' || this.$route.name == 'audio-create' || this.$route.name == 'audio-edit' || this.$route.name == 'sales' || this.$route.name == 'payout'|| this.$route.name == 'guide-payment'|| this.$route.name == 'sales-application')
+    if(this.$route.name == 'exhibited-audios' || this.$route.name == 'transfer-account-setting' || this.$route.name == 'audio-create' || this.$route.name == 'audio-edit' || this.$route.name == 'sales' || this.$route.name == 'payout'|| this.$route.name == 'guide-payment'|| this.$route.name == 'sales-application' || this.$route.name == 'application-history')
     {
       this.createrClass = true
     }
