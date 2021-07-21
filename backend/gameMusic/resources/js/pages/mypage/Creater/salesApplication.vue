@@ -126,6 +126,7 @@
                   color="primary"
                   text
                   style="font-weight: bold;"
+                  @click="payout"
                 >
                   申請する
                 </v-btn>
@@ -165,6 +166,10 @@ export default {
       sales:[],
       transferAccount: {},
       dialog: false,
+      options: {
+          duration: 1500,
+          type: 'info'
+      }
     }
   },
   computed: {
@@ -200,6 +205,27 @@ export default {
     }
   },
   methods: {
+    async payout() {
+      try{
+        var res = confirm("振込申請しますか？");
+          if( res == true ) {
+             await this.$store.dispatch('purchase/payout', {price: this.earning})
+          }
+          else {
+              return false
+          }
+      }
+      catch(e){
+        // console.log(e);
+      }
+      finally{
+        this.toasted();
+        this.getSalesData();
+      }
+    },
+    toasted() {
+      this.$toasted.show('申請完了しました。', this.options);
+    },
     async getSalesData() {
       try{
         this.loading = true

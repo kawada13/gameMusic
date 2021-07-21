@@ -122,9 +122,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // 振込申請ページ用で使うオーディオデータ取得
     Route::get('audio/{id}/payout', 'PurchaseRecordController@payoutAudio')->name('audio_payout');
     // 振込申請
-    Route::post('{id}/payout', 'PurchaseRecordController@payout')->name('payout');
+    Route::post('payout', 'PurchaseRecordController@payout')->name('payout');
     // 管理者が入金する
-    Route::post('{id}/payment', 'PurchaseRecordController@adminPayment')->name('adminPayment');
+    Route::post('payment', 'PurchaseRecordController@adminPayment')->name('adminPayment');
 
 
     // チャットメッセージ作成

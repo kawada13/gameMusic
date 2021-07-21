@@ -29,7 +29,8 @@ const mutations = {
   },
   // セット全ての購入データ
   setAllPurchases(state, data) {
-    state.allPurchases = data.records
+    state.allPurchases.purchaseRecords = data.purchase_records
+    state.allPurchases.transferRecords = data.transferRecords
   },
 }
 
@@ -89,18 +90,18 @@ const actions = {
     })
   },
   // 振込申請
-  async payout({ commit }, id) {
-    await axios.post(`/api/${id}/payout`)
+  async payout({ commit }, data) {
+    await axios.post(`/api/payout`, data)
     .then(res => {
-      // console.log(res.data);
+      console.log(res.data);
     })
     .catch(e => {
       console.log(e);
     })
   },
   // 管理者が入金する
-  async adminPayment({ commit }, id) {
-    await axios.post(`/api/${id}/payment`)
+  async adminPayment({ commit }, data) {
+    await axios.post(`/api/payment`, data)
     .then(res => {
       // console.log(res.data);
     })

@@ -19,6 +19,7 @@ use App\AudioUse;
 use App\PurchaseRecord;
 use App\ChatMessage;
 use App\Announcement;
+use App\TransferRecord;
 
 // イベント
 use App\Events\ChatPusher;
@@ -199,13 +200,16 @@ class PurchaseRecordController extends Controller
     public function allDatas() {
 
         try{
-            $records = PurchaseRecord::with(['audio'=> function($query){
+            $purchase_records = PurchaseRecord::with(['audio'=> function($query){
                         $query->with('user');
                     }])->get();
 
+            $transferRecords = TransferRecord::with(['user'])->get();
+
             return response()->json([
                 'message' => '成功',
-                'records' => $records,
+                'purchase_records' => $purchase_records,
+                'transferRecords' => $transferRecords,
             ],200);
 
         }catch(\Exception $e){
@@ -243,19 +247,30 @@ class PurchaseRecordController extends Controller
     }
 
     // 振込申請
-    public function payout($id) {
+    public function payout(Request $request) {
 
         DB::beginTransaction();
 
         try{
+            // 購入履歴更新
+            $purchase_records = PurchaseRecord::whereHas('audio', function($query) {
+                $query->where('user_id', Auth::id());
+            })->get();
+
             $today = date("Y-m-d H:i:s");
 
+            foreach($purchase_records as $purchase_record){
+                $purchase_record->status = 1;
+                $purchase_record->withdraw_at = $today;
+                $purchase_record->save();
+            }
 
-            $purchase_record = PurchaseRecord::where('audio_id', $id)
-                                               ->first();
-            $purchase_record->status = 1;
-            $purchase_record->withdraw_at = $today;
-            $purchase_record->save();
+            // 申請履歴作成
+            $transferRecord = new TransferRecord;
+            $transferRecord->user_id = Auth::id();
+            $transferRecord->price = $request->price;
+            $transferRecord->save();
+
 
             DB::commit();
 
@@ -273,7 +288,7 @@ class PurchaseRecordController extends Controller
 
     }
     // 管理者が入金する
-    public function adminPayment($id) {
+    public function adminPayment(Request $request) {
 
         DB::beginTransaction();
 
@@ -287,9 +302,23 @@ class PurchaseRecordController extends Controller
                 ],500);
             }
 
-            $purchase_record = PurchaseRecord::find($id);
-            $purchase_record->status = 2;
-            $purchase_record->save();
+            $userId = $request->userId;
+            $transferRecordId = $request->transferRecordId;
+
+            $purchase_records = PurchaseRecord::whereHas('audio', function($query) use($userId) {
+                $query->where('user_id', $userId);
+            })->get();
+
+            foreach($purchase_records as $purchase_record){
+                $purchase_record->status = 2;
+                $purchase_record->save();
+            }
+
+            // 申請履歴更新
+            $transferRecord = TransferRecord::find($transferRecordId);
+            $transferRecord->status = 1;
+            $transferRecord->save();
+
 
             DB::commit();
 

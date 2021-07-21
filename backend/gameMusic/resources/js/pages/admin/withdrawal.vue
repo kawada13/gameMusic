@@ -28,12 +28,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(purchasing, i) in purchasings" :key="i">
+              <tr v-for="(pretransferRecord, i) in pretransferRecords" :key="i">
                 <th scope="row">{{i + 1}}</th>
-                <td><a href @click="$router.push({ name: 'usershow', params: { id: `${purchasing.audio.user_id}` }})">{{purchasing.audio.user.name}}</a></td>
-                <td>{{purchasing.withdraw_at | fromiso}}</td>
-                <td><i class="fas fa-yen-sign"></i>{{purchasing.price | comma}}</td>
-                <td><button type="button" class="btn btn-danger text-white font-weight-bold" @click="payment(purchasing.id)">入金する</button></td>
+                <td><a href @click="$router.push({ name: 'usershow', params: { id: `${pretransferRecord.user_id}` }})">{{pretransferRecord.user.name}}</a></td>
+                <td>{{pretransferRecord.created_at | fromiso}}</td>
+                <td><i class="fas fa-yen-sign"></i>{{pretransferRecord.price | comma}}</td>
+                <td><button type="button" class="btn btn-danger text-white font-weight-bold" @click="payment(pretransferRecord.user_id, pretransferRecord.id)">入金する</button></td>
               </tr>
             </tbody>
           </table>
@@ -51,18 +51,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(purchased, i) in purchaseds" :key="i">
+              <tr v-for="(transferRecord, i) in transferRecorded" :key="i">
                 <th scope="row">{{i + 1}}</th>
-                <td><a href @click="$router.push({ name: 'usershow', params: { id: `${purchased.audio.user_id}` }})">{{purchased.audio.user.name}}</a></td>
-                <td>{{purchased.withdraw_at | fromiso}}</td>
-                <td><i class="fas fa-yen-sign"></i>{{purchased.price | comma}}</td>
-                <td>{{purchased.updated_at | fromiso}}</td>
+                <td><a href @click="$router.push({ name: 'usershow', params: { id: `${transferRecord.user_id}` }})">{{transferRecord.user.name}}</a></td>
+                <td>{{transferRecord.created_at | fromiso}}</td>
+                <td><i class="fas fa-yen-sign"></i>{{transferRecord.price | comma}}</td>
+                <td>{{transferRecord.updated_at | fromiso}}</td>
               </tr>
             </tbody>
           </table>
         </div>
-
-
       </div>
     </div>
   </div>
@@ -74,9 +72,10 @@ export default {
   data() {
     return {
       loading: false,
-      purchases: [], //全ての購入履歴データ
-      purchasings:[], //申請中の購入履歴データ
-      purchaseds:[], //入金済の購入履歴データ
+      purchaseRecords: [], //全ての購入履歴データ
+      transferRecords:[], //全ての申請データ
+      pretransferRecords:[], //振込前の申請データ
+      transferRecorded:[], //振込後の申請データ
       options: {
           duration: 1500,
           type: 'info'
@@ -90,14 +89,18 @@ export default {
         this.loading = true
         await this.$store.dispatch('purchase/getAllPurchase')
 
+
         //全ての購入履歴データ
-        this.purchases = this.$store.state.purchase.allPurchases
+        this.purchaseRecords = this.$store.state.purchase.allPurchases.purchaseRecords
 
-        //申請中の購入履歴データ
-        this.purchasings = this.purchases.filter(o => o.status == 1)
+        //全ての申請履歴データ
+        this.transferRecords = this.$store.state.purchase.allPurchases.transferRecords
 
-        //入金済の購入履歴データ
-        this.purchaseds = this.purchases.filter(o => o.status == 2)
+        // 振込前の申請データ
+        this.pretransferRecords = this.transferRecords.filter(o => o.status == 0)
+        // 振込後の申請データ
+        this.transferRecorded = this.transferRecords.filter(o => o.status == 1)
+
       }
       catch(e){
         // console.log(e);
@@ -107,13 +110,13 @@ export default {
         this.loading = false
       }
     },
-    async payment(id) {
+    async payment(userId, transferRecordId) {
       let res = confirm("「入金済」にステータスを変更してもよろしいですか？");
 
       if( res == true ) {
         try{
           this.loading = true
-          await this.$store.dispatch('purchase/adminPayment', id)
+          await this.$store.dispatch('purchase/adminPayment', {userId: userId, transferRecordId: transferRecordId})
         }
         catch(e){
           // console.log(e);
