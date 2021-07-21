@@ -7,7 +7,7 @@
     出品手数料について
   </div>
   <div class="card-body">
-    <p>取得報酬額が<span class="underline">1,000円以上</span>となった場合に、振込申請をすることができます。</p>
+    <p>申請可能金額が<span class="underline">1,000円以上</span>となった場合に、振込申請をすることができます。</p>
     <p class="mb-3">また、音源の出品には以下の手数料がかかります。</p>
     <p class="type">決済手数料</p>
     <p class="mb-3">販売価格の3.6%（<a href="https://stripe.com/jp" target="_blank">Stripe</a>の決済手数料に準拠しています）</p>

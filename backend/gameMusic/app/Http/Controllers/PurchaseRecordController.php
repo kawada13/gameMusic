@@ -119,7 +119,8 @@ class PurchaseRecordController extends Controller
 
           } else {
 
-            return redirect('http://game-music.fun/login');
+            // return redirect('http://game-music.fun/login');
+            return redirect('http://localhost/login');
           }
 
 

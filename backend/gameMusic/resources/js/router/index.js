@@ -42,6 +42,7 @@ import TransferAccountSetting from '../pages/mypage/Creater/TransferAccountSetti
 import AudioCreate from '../pages/mypage/Creater/audio/create.vue'
 import AudioEdit from '../pages/mypage/Creater/audio/edit.vue'
 import Sales from '../pages/mypage/Creater/sales.vue'
+import SalesApplication from '../pages/mypage/Creater/salesApplication.vue'
 import GuidePayment from '../pages/mypage/Creater/guidePayment.vue'
 import Payout from '../pages/mypage/Creater/payout.vue'
 
@@ -202,6 +203,11 @@ const routes = new VueRouter({
               path: 'sales/:id/payout',
               component: Payout,
               name:'payout'
+            },
+            {
+              path: 'sales/application',
+              component: SalesApplication,
+              name:'sales-application'
             },
             {
               path: 'guide/payment',
