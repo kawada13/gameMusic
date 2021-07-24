@@ -248,6 +248,7 @@ export default {
 <style scoped>
 .title h4 {
   font-weight: bold;
+  color: #34495e;
 }
 .store{
   color: white;
@@ -267,6 +268,9 @@ textarea {
 }
 .creater_image img {
   height: 120px;
+}
+label {
+  color: #34495e;
 }
 </style>
 

@@ -25,7 +25,7 @@
 
        <!-- 左上 -->
         <div class="audio_head">
-          <h1>{{ audio.title }}</h1>
+          <h1 style="color: #34495e;">{{ audio.title }}</h1>
            <audio controls controlslist="nodownload" class="my-3">
             <source :src="audio.sample_audio_file">
            </audio>
@@ -41,36 +41,36 @@
             <div class="card-body detail type_title d-flex titles justify-content-start">
               <p class="">説明文</p>
             </div>
-            <div class="card-body" style="text-align: left;">
-              <p class="mr-2 mb-2 p-2" v-html="audio.content" style="white-space: pre-wrap; word-wrap:break-word; line-height:1.7"></p>
+            <div class="card-body explanation" style="text-align: left;">
+              <p class="mr-2 mb-2 p-2 " v-html="audio.content" style="white-space: pre-wrap; word-wrap:break-word; line-height:1.7"></p>
             </div>
 
             <div class="card-body detail type_title d-flex titles justify-content-start">
               <p class="">サウンドの種類</p>
             </div>
             <div class="card-body detail type_content buttons row">
-              <span class="mr-2 mb-2 border border-info p-2">{{audio.sound.name}}</span>
+              <span class="mr-2 mb-2 border border-info p-2 font-weight-bold">{{audio.sound.name}}</span>
             </div>
 
             <div class="card-body detail understanding_title d-flex justify-content-start">
               <p class="">イメージ</p>
             </div>
             <div class="card-body detail type_content buttons row">
-              <span class="mr-2 mb-2 border border-info p-2" v-for="(understanding, i) in audio.understandings" :key="i">{{understanding.name}}</span>
+              <span class="mr-2 mb-2 border border-info p-2 font-weight-bold" v-for="(understanding, i) in audio.understandings" :key="i">{{understanding.name}}</span>
             </div>
 
             <div class="card-body detail instrument_title d-flex justify-content-start">
               <p class="">用途(シーン)</p>
             </div>
             <div class="card-body detail type_content buttons row">
-              <span class="mr-2 mb-2 border border-info p-2" v-for="(use, i) in audio.uses" :key="i">{{use.name}}</span>
+              <span class="mr-2 mb-2 border border-info p-2 font-weight-bold" v-for="(use, i) in audio.uses" :key="i">{{use.name}}</span>
             </div>
 
             <div class="card-body detail instrument_title d-flex justify-content-start">
               <p class="">使用楽器</p>
             </div>
             <div class="card-body detail type_content buttons row">
-              <span class="mr-2 mb-2 border border-info p-2" v-for="(instrument, i) in audio.instruments" :key="i">{{instrument.name}}</span>
+              <span class="mr-2 mb-2 border border-info p-2 font-weight-bold" v-for="(instrument, i) in audio.instruments" :key="i">{{instrument.name}}</span>
             </div>
           </div>
         </div>
@@ -207,8 +207,8 @@ export default {
   },
   methods: {
     async checkout() {
-      // const url = `http://game-music.fun/${this.$route.params.id}/checkout`
-      const url = `http://localhost/${this.$route.params.id}/checkout`
+      const url = `http://game-music.fun/${this.$route.params.id}/checkout`
+      // const url = `http://localhost/${this.$route.params.id}/checkout`
       window.location.href = url
     },
     async follow(userId) {
@@ -339,6 +339,11 @@ export default {
 </script>
 
 <style scoped>
+
+.explanation {
+  padding-top: 0;
+  padding-bottom: 0;
+}
 
 .modal-body p {
   margin-bottom: 0;

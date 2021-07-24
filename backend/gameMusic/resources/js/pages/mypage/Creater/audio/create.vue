@@ -9,8 +9,15 @@
 
   <div v-if="!loading">
    <div class="head">
-      <h4>オーディオ商品登録</h4>
+      <h4 style="color: #34495e;">オーディオ商品登録</h4>
     </div>
+
+    <div class="mb-5 d-flex justify-content-end fee">
+        <a class="font-weight-bold text-danger saleshistory" @click="$router.push({ name: 'guide-payment' })">出品・手数料等について<i class="fas fa-chevron-right pl-2"></i></a>
+    </div>
+
+
+
     <div class="form_creater_edit my-5">
       <div class="card">
         <div class="card-body">
@@ -342,6 +349,9 @@ export default {
 
 
 <style scoped>
+.fee a:hover {
+  cursor: pointer;
+}
 .head h4 {
   font-weight: bold;
 }

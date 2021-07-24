@@ -9,7 +9,7 @@
 
 
     <div class="card purchase_audio_title">
-        <h3 class="card-header font-weight-bold application_title">
+        <h3 class="card-header font-weight-bold application_title tt">
           振込申請履歴
         </h3>
 
@@ -19,18 +19,15 @@
         </div>
 
         <div class="d-flex justify-content-center my-3 uriage" v-for="(application, i) in getItems" :key="i">
-          <div class="card" style="width: 37rem;">
+          <div class="card mx-2" style="width: 100%;">
             <div class="card-body uriage_detail">
-              <p class="price">{{ application.price|comma }}円</p>
+              <p class="price text-danger">{{ application.price|comma }}円</p>
               <p class="card-subtitle mb-2 text-muted" >申請日：{{application.created_at | fromiso}}</p>
             </div>
           </div>
         </div>
-     </div>
 
-
-
-      <!-- ページネーション -->
+          <!-- ページネーション -->
     <div class="pagination mt-5 d-flex justify-content-center">
       <div v-if="paginateData.applications.length">
         <paginate
@@ -51,8 +48,7 @@
         </paginate>
       </div>
     </div>
-
-
+     </div>
 
   </div>
 
@@ -124,5 +120,10 @@ export default {
 
 .application_title {
   color: #34495e;
+}
+.tt {
+  color: #34495e;
+  font-weight: bold;
+  background-color: #D9F0FE;
 }
 </style>

@@ -15,7 +15,7 @@
 
           <!-- 左上 -->
           <div class="redruitmetnt_head">
-            <h1>{{ recruitment.title }}</h1>
+            <h1 style="color: #34495e;">{{ recruitment.title }}</h1>
           </div>
 
           <!-- 左下 -->

@@ -10,11 +10,11 @@
 
   <div v-if="!loading">
     <div class="profile_title mb-4" v-if="!userloading">
-        <h2>{{user.user.name}}さんの作品一覧</h2>
+        <h2 style="color: #34495e;">{{user.user.name}}さんの作品一覧</h2>
     </div>
       <!-- 作品一覧 -->
       <div class="card mt-2">
-        <div class="card-header">
+        <div class="card-header tt">
           オーディオ一覧
         </div>
         <div class="audios ml-4 my-3" v-for="(audio,i) in getItems" :key="i">
@@ -152,6 +152,12 @@ export default {
 
 audio {
   margin-bottom: 0!important;
+}
+
+.tt {
+  color: #34495e;
+  font-weight: bold;
+  background-color: #D9F0FE;
 }
 
 

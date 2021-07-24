@@ -14,7 +14,7 @@
 
           <!-- 自己紹介 -->
           <div class="card mt-5">
-            <div class="card-header">
+            <div class="card-header hh">
               自己紹介
             </div>
             <ul class="list-group list-group-flush">
@@ -24,7 +24,7 @@
 
           <!-- 使用機材 -->
           <div class="card mt-2">
-            <div class="card-header">
+            <div class="card-header hh">
               使用機材
             </div>
             <ul class="list-group list-group-flush">
@@ -77,6 +77,7 @@ export default {
 <style scoped>
 
 .profile_title h2 {
+  color: #34495e;
   font-weight: bold;
 }
 
@@ -101,6 +102,12 @@ export default {
 
 .user_name h3 {
   text-align: center;
+}
+
+.hh {
+  background-color: #D9F0FE;
+  color: #34495e;
+  font-weight: bold;
 }
 
 

@@ -7,12 +7,12 @@
 
   <div v-if="!loading">
     <div class="profile_title">
-        <h2>{{user.user.name}}さんのプロフィール</h2>
+        <h2 style="color: #34495e;">{{user.user.name}}さんのプロフィール</h2>
       </div>
 
       <!-- 自己紹介 -->
       <div class="card mt-5">
-        <div class="card-header">
+        <div class="card-header tt">
           自己紹介
         </div>
         <ul class="list-group list-group-flush">
@@ -22,7 +22,7 @@
 
       <!-- 使用機材 -->
       <div class="card mt-2">
-        <div class="card-header">
+        <div class="card-header tt">
           使用機材
         </div>
         <ul class="list-group list-group-flush">
@@ -32,7 +32,7 @@
 
       <!-- 新着オーディオ -->
       <div class="card mt-2">
-        <div class="card-header">
+        <div class="card-header tt">
           新着オーディオ
         </div>
         <div class="text-center mt-4" v-if="user.userAudios.length == 0">
@@ -149,6 +149,12 @@ export default {
 .audio_title:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.tt {
+  color: #34495e;
+  font-weight: bold;
+  background-color: #D9F0FE;
 }
 
 

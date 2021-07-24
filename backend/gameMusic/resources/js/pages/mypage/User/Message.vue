@@ -3,7 +3,7 @@
 
     <!-- フォーム部分 -->
     <div class="card" v-if="!userloading">
-      <div class="card-header">
+      <div class="card-header tt">
         メッセージ
       </div>
       <div class="card-body">
@@ -253,6 +253,12 @@ export default {
    word-wrap: break-word;
    line-height: 1.7;
 }
+
+.tt {
+  color: #34495e;
+  font-weight: bold;
+  background-color: #D9F0FE;
+} 
 
 @media screen and (max-width:767px) {
     /*画面サイズが767px以下の場合読み込む（スマホ）*/

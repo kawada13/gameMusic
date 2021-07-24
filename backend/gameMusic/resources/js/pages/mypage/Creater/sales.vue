@@ -5,11 +5,8 @@
       <Loader />
     </div>
 
-
-
-
       <div class="card purchase_audio_title">
-        <h3 class="card-header">
+        <h3 class="card-header tt">
           売上履歴
         </h3>
 
@@ -19,8 +16,8 @@
         </div>
 
 
-        <div class="d-flex justify-content-center my-3 uriage" v-for="(sale, i) in getItems" :key="i">
-          <div class="card" style="width: 37rem;">
+        <!-- <div class="d-flex justify-content-center my-3 uriage" v-for="(sale, i) in getItems" :key="i">
+          <div class="card mx-2" style="width: 100%;">
             <div class="card-body uriage_detail">
               <p class="card-title subtitle mb-2 audio_title" @click="$router.push({ name: 'audio-show', params: { id: `${sale.audio_id}` } })">{{sale.audio.title}}</p>
               <p class="card-title subtitle">売上金</p>
@@ -31,7 +28,26 @@
               <p class="audio_title" @click="$router.push({ name: 'user-show', params: { id: `${sale.user_id}` }})">{{sale.user.name}}</p>
             </div>
           </div>
-        </div>
+        </div> -->
+
+
+        <div class="d-flex justify-content-center my-3" v-for="(sale, i) in getItems" :key="i">
+            <div class="card mx-2" style="width: 100%;">
+              <div class="card-body buy">
+
+                <div class="d-flex justify-content-between first text-center">
+                    <p class="title" @click="$router.push({ name: 'audio-show', params: { id: `${sale.audio_id}` } })">{{sale.audio.title}}</p>
+                    <p class="price"><i class="fas fa-yen-sign"></i>{{sale.price | comma}}</p>
+                </div>
+
+                <div class="second">
+                  <p class="creater" @click="$router.push({ name: 'user-show', params: { id: `${sale.user_id}` }})">購入ユーザー：<a class="link">{{sale.user.name}}</a></p>
+                  <h6 class="card-subtitle mb-2 text-muted creater_name">日時:{{sale.created_at | fromiso}}</h6>
+                </div>
+
+              </div>
+            </div>
+          </div>
 
         <!-- ページネーション -->
     <div class="pagination mt-5 d-flex justify-content-center">
@@ -134,17 +150,43 @@ export default {
 
 <style scoped>
 
-.uriage_detail p {
+.second .creater {
+  font-size: 14px;
+  color: #34495e;
   margin-bottom: 0;
 }
-.uriage_detail .subtitle {
-  font-weight: bold;
-  font-size: 18px;
-}
-.uriage_detail .audio_title:hover {
+.second a:hover {
+  font-size: 14px;
+  color: #34495e;
+  margin-bottom: 0;
   cursor: pointer;
   text-decoration: underline;
 }
+
+
+.first p {
+  font-size: 20px;
+}
+
+.first .title {
+  color: #34495e;
+  font-weight: bold;
+  overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.first .title:hover {
+  color: #34495e;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.first .price {
+  color: red;
+  font-weight: bold;
+  min-width :100px;
+}
+
 
 .uriage {
   color: #34495e;
@@ -164,14 +206,6 @@ export default {
 }
 
 
-.purchase_audio_body .audio_title:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
-.creater_name:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
 
 .audio_price {
   font-size: 23px;
@@ -180,6 +214,12 @@ export default {
 }
 .withdrawn {
   cursor: auto!important;
+}
+
+.tt {
+  color: #34495e;
+  font-weight: bold;
+  background-color: #D9F0FE;
 }
 
 @media screen and (max-width:767px) {

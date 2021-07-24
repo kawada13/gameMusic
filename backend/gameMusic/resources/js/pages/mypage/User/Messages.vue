@@ -7,7 +7,7 @@
 
 
     <div class="card mt-2" v-if="!loading">
-        <h3 class="card-header">
+        <h3 class="card-header tt">
           メッセージ一覧
         </h3>
         <div class="no_user my-4 text-center" v-if="chatRooms.length == 0">
@@ -92,6 +92,12 @@ export default {
 .creater_name {
   font-weight: 700;
   font-size: 25px;
+}
+
+.tt {
+  color: #34495e;
+  font-weight: bold;
+  background-color: #D9F0FE;
 }
 
 @media screen and (max-width:767px) {

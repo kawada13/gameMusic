@@ -7,7 +7,7 @@
 
 
     <div class="card mt-2" v-if="!loading">
-        <h3 class="card-header">
+        <h3 class="card-header tt">
           募集一覧
         </h3>
 
@@ -19,7 +19,7 @@
           <li class="list-group-item" v-for="(recruitment, i) in recruitments" :key="i">
 
             <div>
-              <h5>{{recruitment.title}}</h5>
+              <h5 @click="$router.push({ name: 'recruitment_show', params: { id: `${recruitment.id}` }})" class="recirote_title">{{recruitment.title}}</h5>
               <h6 class="mb-2 text-muted">作成日時：{{recruitment.created_at | fromiso}}</h6>
             </div>
             <div class="edit_delete">
@@ -111,6 +111,17 @@ export default {
 }
 .edit_delete:hover{
   cursor: pointer;
+}
+
+.recirote_title:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.tt {
+  color: #34495e;
+  font-weight: bold;
+  background-color: #D9F0FE;
 }
 
 @media screen and (max-width:767px) {
