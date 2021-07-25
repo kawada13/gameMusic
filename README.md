@@ -181,6 +181,7 @@ URL： http://game-music.fun/
 | chat_rooms_users  | ユーザーのチャットルーム情報  |
 | favorites  | お気に入り中間テーブル  |
 | transfer_accounts  | ユーザー口座情報  |
+| transfer_records  | 振込申請履歴  |
 | users  | ユーザー情報  |
 | user_informations  | ユーザープロフィール情報  |
 | user_follows  | ユーザーフォロー情報  |  
