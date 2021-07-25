@@ -31,7 +31,7 @@ URL： http://game-music.fun/
 技術的構成は、フロントはVue.js、バックエンドはLaravelをAPIとして機能させることで、SPA構成になっております。  
 <img width="700" alt="スクリーンショット 2021-07-04 0 04 00" src="https://user-images.githubusercontent.com/61454264/124358457-59b37580-dc5b-11eb-8062-dbf2fd51ecc1.png">
 
-### 登録/ログイン関連(laravel/sanctum)
+### 登録/ログイン関連
 ・ユーザーログイン/登録  
 ・ゲストユーザーログイン(簡単ログイン)  
 ・管理者ログイン(mail: admin@gmail.com, password: adminuser)
